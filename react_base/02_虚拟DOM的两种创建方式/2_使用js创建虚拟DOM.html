@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2_使用js创建虚拟DOM</title>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+
+    <script type="text/javascript">
+
+        // 使用js创建虚拟DOM
+        // 第一个参数是标签名，第二个参数是标签的属性，第三个参数是标签的内容(子节点)
+        const span_dom = React.createElement('span', null, "hello react");
+        const v_dom = React.createElement('h1', { id: "title" }, span_dom);
+        // 写起来很麻烦，所以一般使用jsx语法来创建虚拟DOM
+
+        ReactDOM.render(v_dom, document.getElementById('root'))
+
+    </script>
+</body>
+
+</html>

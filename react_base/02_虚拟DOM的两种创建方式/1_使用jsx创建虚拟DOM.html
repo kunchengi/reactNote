@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1_使用jsx创建虚拟DOM</title>
+</head>
+<body>
+     <div id="root"></div>
+
+     <script type="text/javascript" src="../js/react.development.js"></script>
+     <script type="text/javascript" src="../js/react-dom.development.js"></script>
+     <script type="text/javascript" src="../js/babel.min.js"></script>
+
+     <script type="text/babel">
+
+         // 使用jsx创建虚拟DOM
+        // const v_dom = <h1 id="title"><span>hello react</span></h1>;
+        // 可以用括号包裹
+        const v_dom = (
+            <h1 id="title">
+                <span>hello react</span>
+            </h1>
+        )
+
+        ReactDOM.render(v_dom, document.getElementById('root'))
+
+     </script>
+</body>
+</html>
