@@ -32,6 +32,8 @@
         )
 
         // 使用花括号 `{}` 可以在JSX中嵌入JavaScript表达式
+            // 只能写JS表达式，不能写js语句
+            // 一个表达式会产生/返回一个值，可以放在任何需要值的地方
         const myConstent = 'myConstent'
         const v_dom3 = <h1>{myConstent}</h1>
 
@@ -58,7 +60,8 @@
         const isDog = true;
         const v_dom8 = <h1>{isDog ? 'Dog' : 'Cat'}</h1>;
 
-        // 使用数组的 `map` 方法可以生成多个元素。
+        // 使用数组的 `map` 方法可以生成多个元素
+        // list元素必须带有 `key` 属性，且key值唯一，不建议使用索引值，因为索引值可能会造成性能问题
         const animals = ['dog', 'cat', 'hen'];
         const v_dom9 = (
             <ul>
