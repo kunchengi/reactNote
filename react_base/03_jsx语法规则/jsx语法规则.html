@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1_使用jsx创建虚拟DOM</title>
+    <style>
+        .title{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+     <div id="root"></div>
+
+     <script type="text/javascript" src="../js/react.development.js"></script>
+     <script type="text/javascript" src="../js/react-dom.development.js"></script>
+     <script type="text/javascript" src="../js/babel.min.js"></script>
+
+     <script type="text/babel">
+
+        // 每个JSX表达式必须有且只有一个根元素
+        // 标签必须闭合
+        // 标签首字母
+            // 若以小写字母开头,则会转换为html同名的标签,若html无该标签,则报错
+            // 若以大写字母开头,则转换为react组件,若react无该组件,则报错
+        const v_dom = <h1>hello react</h1>;
+
+        // 可以用括号包裹
+        const v_dom2 = (
+            <h1>hello react</h1>
+        )
+
+        // 使用花括号 `{}` 可以在JSX中嵌入JavaScript表达式
+        const myConstent = 'myConstent'
+        const v_dom3 = <h1>{myConstent}</h1>
+
+
+        // 属性值可以是字符串或JavaScript表达式。
+        // 设置class属性时，需要使用className
+        const myId = 'myId';
+        const v_dom4 = <h1 id={myId} className="title">hello react</h1>
+
+        // 可以使用内联样式或CSS类
+        // 内联样式需要用{{key:value}}
+        const v_dom5 = <h1 style={{color: 'blue'}}>Styled Text</h1>;
+
+        const styles = {
+            color: 'blue',
+            fontSize: '20px'
+        };
+        const v_dom6 = <h1 style={styles}>Styled Text</h1>;
+
+        // 对于没有子元素的标签，可以使用自闭合形式。
+        const v_dom7 = <img src="http://www.baidu.com/img/bd_logo1.png" />;
+
+        // 可以使用三元运算符或逻辑运算符进行条件渲染。
+        const isDog = true;
+        const v_dom8 = <h1>{isDog ? 'Dog' : 'Cat'}</h1>;
+
+        // 使用数组的 `map` 方法可以生成多个元素。
+        const animals = ['dog', 'cat', 'hen'];
+        const v_dom9 = (
+            <ul>
+                {animals.map(animal => (
+                    <li key={animal}>{animal}</li>
+                ))}
+            </ul>
+        );
+
+     </script>
+</body>
+</html>
