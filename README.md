@@ -191,3 +191,75 @@ JavaScript 模块是一种组织代码的方式，允许将相关的功能封装
 每个组件负责完成特定的 UI 功能或业务逻辑，组件之间通过明确的接口进行通信。
 
 组件化设计的主要目的是提高代码的可读性、可维护性、可复用性和可测试性。
+
+## 组件三大属性
+
+### state
+
+在React组件中，`state` 是一个对象，用于存储组件的状态数据。
+
+这些状态数据可以在组件的生命周期内发生变化
+
+当 `state` 发生变化时，组件会自动重新渲染以反映最新的状态。
+
+#### 主要特点
+
+* **私有性**：每个组件的 `state` 都是私有的，不会影响其他组件。
+* **动态性**：`state` 可以在组件的生命周期内动态改变。
+* **触发重渲染**：当 `state` 发生变化时，React 会自动调用 `render` 方法重新渲染组件
+
+#### 使用方法
+
+1. 在类组件中，可以通过构造函数或直接在类中定义 `state` 来初始化`state`。可以通过 `this.state` 读取当前的状态。
+   ```jsx
+   class ExampleComponent extends React.Component {
+     constructor(props) {
+       super(props);
+       // 在构造函数中定义
+       this.state = {
+         count: 0
+       };
+     }
+
+     // 或者直接在类中定义
+     state = {
+       count: 0
+     };
+
+     render() {
+       // 读取当前状态
+       return <div>{this.state.count}</div>;
+     }
+   }
+   ```
+2. 使用 `setState` 方法来更新 `state`。`setState` 是异步的，React 会批量处理状态更新以提高性能。
+   ```jsx
+   class ExampleComponent extends React.Component {
+     state = {
+       count: 0
+     };
+
+     incrementCount = () => {
+       this.setState(prevState => ({
+         count: prevState.count + 1
+       }));
+     };
+
+     render() {
+       return (
+         <div>
+           <p>Count: {this.state.count}</p>
+           <button onClick={this.incrementCount}>Increment</button>
+         </div>
+       );
+     }
+   }
+   ```
+
+#### 注意事项
+
+
+* **避免直接修改 State**：直接修改 `state` 对象不会触发组件的重新渲染。应该始终使用 `setState` 方法来更新状态。
+
+* **批量更新**：`setState` 是异步的，多次调用可能会被合并成一次更新，以提高性能。
+* **函数形式的 setState**：当新的状态依赖于前一个状态时，建议使用函数形式的 `setState`，以确保状态更新的顺序正确。
