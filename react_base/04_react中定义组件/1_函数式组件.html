@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1_函数式组件</title>
+    <style>
+        .title{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+     <div id="root"></div>
+
+     <script type="text/javascript" src="../js/react.development.js"></script>
+     <script type="text/javascript" src="../js/react-dom.development.js"></script>
+     <script type="text/javascript" src="../js/babel.min.js"></script>
+
+     <script type="text/babel">
+        // 创建函数式组件
+        // 函数式组件必须返回一个JSX元素
+        // 函数名称必须以大写字母开头
+        // 函数式组件是给react渲染的，自动开启严格模式，this指向undefined
+        function MyComponent(){
+            console.log(this);// undefined
+            return <h2>我是用函数定义的组件（适用于【简单组件】的定义）</h2>
+        }
+        // 渲染函数式组件
+        // React会解析组件标签，并调用组件函数，将返回的JSX元素渲染到页面中
+        ReactDOM.render(<MyComponent/>, document.getElementById('root'));
+     </script>
+</body>
+</html>
