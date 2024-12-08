@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1_初始化state</title>
+    <style>
+        .title{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+     <div id="root"></div>
+
+     <script type="text/javascript" src="../js/react.development.js"></script>
+     <script type="text/javascript" src="../js/react-dom.development.js"></script>
+     <script type="text/javascript" src="../js/babel.min.js"></script>
+
+     <script type="text/babel">
+        // 直接在类中定义state，其值必须为对象
+        class MyComponent extends React.Component{
+            state = {
+                count: 0
+            }
+
+            render(){
+                return (
+                    <div>
+                        <p>点击次数：{this.state.count}</p>
+                    </div>
+                )
+            }
+        }
+
+        // 在构造器初始化state
+        class MyComponent1 extends React.Component{
+            constructor(props){
+                super(props);
+                this.state = {
+                    count: 1
+                }
+            }
+
+            render(){
+                return (
+                    <div>
+                        <p>{this.state.count}</p>
+                    </div>
+                )
+            }
+        }
+        ReactDOM.render(<MyComponent1/>, document.getElementById('root'));
+
+     </script>
+</body>
+</html>
