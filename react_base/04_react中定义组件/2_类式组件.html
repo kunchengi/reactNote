@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2_类式组件</title>
+    <style>
+        .title{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+     <div id="root"></div>
+
+     <script type="text/javascript" src="../js/react.development.js"></script>
+     <script type="text/javascript" src="../js/react-dom.development.js"></script>
+     <script type="text/javascript" src="../js/babel.min.js"></script>
+
+     <script type="text/babel">
+        // 创建类式组件
+        // 必须得继承React.Component
+        // 必须实现render方法，返回一个JSX元素
+        class MyComponent extends React.Component{
+            render(){
+                return <h2>我是用类定义的组件（适用于【复杂组件】的定义）</h2>
+            }
+        }
+        // 渲染类式组件
+        // React会解析组件标签，创建组件的实例，并调用render方法，将返回的JSX元素渲染到页面中
+        ReactDOM.render(<MyComponent/>, document.getElementById('root'));
+     </script>
+</body>
+</html>
