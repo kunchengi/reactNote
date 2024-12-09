@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>1_初始化state</title>
+    <title>2_绑定点击事件</title>
 </head>
 <body>
      <div id="root"></div>
@@ -13,23 +13,7 @@
      <script type="text/javascript" src="../js/babel.min.js"></script>
 
      <script type="text/babel">
-        // 直接在类中定义state，其值必须为对象
         class MyComponent extends React.Component{
-            state = {
-                count: 0
-            }
-
-            render(){
-                return (
-                    <div>
-                        <p>点击次数：{this.state.count}</p>
-                    </div>
-                )
-            }
-        }
-
-        // 在构造器初始化state
-        class MyComponent1 extends React.Component{
             constructor(props){
                 super(props);
                 this.state = {
@@ -37,15 +21,30 @@
                 }
             }
 
+            // 点击事件
+            handleClick(){
+                console.log(++this.state.count);
+                console.log(this);// MyComponent
+            }
+
+            // 也可以写成箭头函数，this指向外层作用域
+            handleClick2 = () => {
+                console.log(++this.state.count);
+                console.log(this);// MyComponent
+            }
+
             render(){
+                // 使用bind修改this指向
                 return (
                     <div>
-                        <p>{this.state.count}</p>
+                        <span>{this.state.count}</span>
+                        <button onClick={this.handleClick.bind(this)}>点击1</button>
+                        <button onClick={this.handleClick2}>点击2</button>
                     </div>
                 )
             }
         }
-        ReactDOM.render(<MyComponent1/>, document.getElementById('root'));
+        ReactDOM.render(<MyComponent/>, document.getElementById('root'));
 
      </script>
 </body>
