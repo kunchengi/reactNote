@@ -258,8 +258,52 @@ JavaScript 模块是一种组织代码的方式，允许将相关的功能封装
 
 #### 注意事项
 
-
 * **避免直接修改 State**：直接修改 `state` 对象不会触发组件的重新渲染。应该始终使用 `setState` 方法来更新状态。
-
 * **批量更新**：`setState` 是异步的，多次调用可能会被合并成一次更新，以提高性能。
 * **函数形式的 setState**：当新的状态依赖于前一个状态时，建议使用函数形式的 `setState`，以确保状态更新的顺序正确。
+
+### props
+
+`props` 是组件间传递数据的一种方式。
+
+* **定义与传递**
+
+  * 父组件可以通过在子组件标签内设置属性的方式，将数据传递给子组件。
+  * 例如，如果有一个名为 `ChildComponent` 的子组件，父组件可以向它传递一个名为 `name` 的 prop
+  * `<ChildComponent name="张三" />`
+* **接收与使用**
+
+  * 子组件可以通过其函数参数或类组件的 `this.props` 来访问传递过来的 props。
+  * 在函数组件中：
+
+    ```jsx
+    function ChildComponent(props) {
+      return <h1>你好，{props.name}</h1>;
+    }
+    ```
+  * 在类组件中：
+
+    ```jsx
+    class ChildComponent extends React.Component {
+      render() {
+        return <h1>你好，{this.props.name}</h1>;
+      }
+    }
+    ```
+* **Props 的不可变性**：在 React 中，props 被设计为只读的，即父组件传递给子组件的数据不应该被子组件修改。如果需要改变状态，应该使用 state 或者通过回调函数从父组件传递下来。
+* **默认 Props**：可以通过 `defaultProps` 属性为组件设置默认的 props 值，当父组件没有传递相应的 prop 时，组件会使用这些默认值。
+
+  ```jsx
+  ChildComponent.defaultProps = {
+    name: '未知姓名'
+  };
+  ```
+* **Props 类型检查**：为了确保组件接收到的 props 类型正确，可以使用 `PropTypes` 库进行类型检查。这有助于在开发阶段捕获错误。
+
+  ```jsx
+  import PropTypes from 'prop-types';
+
+  ChildComponent.propTypes = {
+    name: PropTypes.string.isRequired
+  };
+  ```

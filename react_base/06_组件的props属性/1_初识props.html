@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1_初识props</title>
+</head>
+<body>
+     <div id="root"></div>
+     <div id="root1"></div>
+     <script type="text/javascript" src="../js/react.development.js"></script>
+     <script type="text/javascript" src="../js/react-dom.development.js"></script>
+     <script type="text/javascript" src="../js/babel.min.js"></script>
+
+     <script type="text/babel">
+        // 函数式组件，传入props参数，使用props拿到传递的参数
+        function MyComponent(props){
+            return (
+                <div>
+                    <p>{props.name}</p>
+                    <p>{props.age}</p>
+                </div>
+            )
+        }
+        // 在组件中添加属性，传递参数给组件
+        ReactDOM.render(<MyComponent name="张三" age="18"/>, document.getElementById('root'));
+
+        // 类式组件，使用this.props拿到传递的参数
+        class MyComponent1 extends React.Component{
+            // 可以通过 `defaultProps` 属性为组件设置默认的 props 值
+            // 当父组件没有传递相应的 prop 时，组件会使用这些默认值。
+            static defaultProps = {
+                name: 'why',
+                age: 18,
+                sex: '男'
+            }
+
+            render(){
+                // this.props.name = '王五';// props是只读的，不能修改，修改会报错
+                return (
+                    <div>
+                        <p>{this.props.name}</p>
+                        <p>{this.props.age}</p>
+                        <p>{this.props.sex}</p>
+                    </div>
+                )
+            }
+        }
+        // 在组件中添加属性，传递参数给组件
+        ReactDOM.render(<MyComponent1 name="李四" age="19"/>, document.getElementById('root1'));
+
+     </script>
+</body>
+</html>
