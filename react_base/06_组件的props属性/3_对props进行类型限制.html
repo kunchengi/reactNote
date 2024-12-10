@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3_对props进行类型限制</title>
+</head>
+<body>
+     <div id="root"></div>
+     <script type="text/javascript" src="../js/react.development.js"></script>
+     <script type="text/javascript" src="../js/react-dom.development.js"></script>
+     <script type="text/javascript" src="../js/babel.min.js"></script>
+     <!-- 引入类型限制包 -->
+     <script type="text/javascript" src="../js/prop-types.js"></script>
+     <script type="text/babel">
+
+        class MyComponent extends React.Component{
+            static propTypes = {
+                // 验证name属性，必须是字符串类型，并且不能为空
+                name: PropTypes.string.isRequired,
+                // 验证age属性，必须是数字类型
+                age: PropTypes.number,
+                // 验证sex属性，必须是'男'或'女'
+                sex: PropTypes.oneOf(['男', '女']),
+                // 验证address属性，必须是对象类型，并且包含province和city两个属性
+                address: PropTypes.shape({
+                    province: PropTypes.string,
+                    city: PropTypes.string
+                }),
+                // 验证speak属性，必须是函数类型
+                speak: PropTypes.func
+            }
+
+            render(){
+                return (
+                    <div>
+                        <p>{this.props.name}</p>
+                        <p>{this.props.age}</p>
+                        <p>{this.props.sex}</p>
+                        <p>{this.props.address.province}</p>
+                        <p>{this.props.address.city}</p>
+                        <p>{this.props.speak()}</p>
+                    </div>
+                )
+            }
+        }
+        const person = {
+            name: 'why',
+            age: 18,
+            sex: '男',
+            address:{
+                province: '广东省',
+                city: '广州市'
+            },
+            speak: function(){
+                return '我是一个函数'
+            }
+        }
+
+        ReactDOM.render(<MyComponent {...person}/>, document.getElementById('root'));
+     </script>
+</body>
+</html>
