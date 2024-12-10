@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2_批量传入props</title>
+</head>
+<body>
+     <div id="root"></div>
+     <script type="text/javascript" src="../js/react.development.js"></script>
+     <script type="text/javascript" src="../js/react-dom.development.js"></script>
+     <script type="text/javascript" src="../js/babel.min.js"></script>
+
+     <script type="text/babel">
+
+        class MyComponent extends React.Component{
+            render(){
+                return (
+                    <div>
+                        <p>{this.props.name}</p>
+                        <p>{this.props.age}</p>
+                        <p>{this.props.sex}</p>
+                    </div>
+                )
+            }
+        }
+        const person = {
+            name: 'why',
+            age: 18,
+            sex: '男'
+        }
+        // 直接把对象传递给组件{...person}
+        ReactDOM.render(<MyComponent {...person}/>, document.getElementById('root'));
+
+     </script>
+</body>
+</html>
