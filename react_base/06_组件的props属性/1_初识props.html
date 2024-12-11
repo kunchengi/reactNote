@@ -34,6 +34,14 @@
                 age: 18,
                 sex: '男'
             }
+            
+            // 构造函数需传递props参数
+            constructor(props){
+                // 在构造函数中应该先调用super， 否则会报错
+                // 需要将props传递给父类，否则this.props可能为undefined（取决于react版本）
+                super(props);
+                console.log(this.props);
+            }
 
             render(){
                 // this.props.name = '王五';// props是只读的，不能修改，修改会报错
