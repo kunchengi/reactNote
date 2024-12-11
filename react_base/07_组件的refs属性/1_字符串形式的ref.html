@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1_字符串形式的ref</title>
+</head>
+<body>
+     <div id="root"></div>
+     <script type="text/javascript" src="../js/react.development.js"></script>
+     <script type="text/javascript" src="../js/react-dom.development.js"></script>
+     <script type="text/javascript" src="../js/babel.min.js"></script>
+
+     <script type="text/babel">
+
+        class MyComponent extends React.Component{
+            onBlurHandle = () => {
+                // 获取ref属性对应的dom元素
+                console.log(this.refs.myInput);// <input type="text">
+                console.log(this.refs.myInput.value);
+            }
+            render(){
+                // 给标签设置ref属性，值为字符串，可以通过this.refs.myInput属性获取到对应的真实dom元素
+                return (
+                    <div>
+                        <input type="text" ref="myInput" onBlur={this.onBlurHandle}/>
+                    </div>
+                )
+            }
+        }
+        ReactDOM.render(<MyComponent/>, document.getElementById('root'));
+
+     </script>
+</body>
+</html>
