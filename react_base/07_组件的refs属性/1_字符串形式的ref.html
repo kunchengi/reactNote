@@ -21,6 +21,8 @@
             }
             render(){
                 // 给标签设置ref属性，值为字符串，可以通过this.refs.myInput属性获取到对应的真实dom元素
+                // 注意：这种写法不被react官方推荐使用，不建议使用，可能会在未来的版本中移除
+                // 因为ref属性无法获取组件对象，只能获取dom元素，而且ref属性无法动态修改，只能设置一次
                 return (
                     <div>
                         <input type="text" ref="myInput" onBlur={this.onBlurHandle}/>

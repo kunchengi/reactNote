@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2_回调形式的ref</title>
+</head>
+<body>
+     <div id="root"></div>
+     <script type="text/javascript" src="../js/react.development.js"></script>
+     <script type="text/javascript" src="../js/react-dom.development.js"></script>
+     <script type="text/javascript" src="../js/babel.min.js"></script>
+
+     <script type="text/babel">
+
+        class MyComponent extends React.Component{
+            onBlurHandle = () => {
+                console.log(this.inputDom);// <input type="text">
+                console.log(this.inputDom.value);
+            }
+
+            refCallback = (inputDom) => {
+                this.inputDom = inputDom;
+            }
+
+
+
+            render(){
+                return (
+                    <div>
+                        {/*这样可以写注释*/}
+                        {/*给标签设置ref属性，值为回调函数，回调函数的第一个参数为对应的dom元素*/}
+                        {/*内联函数在创建组件时执行一次，往后每次更新会执行两次，第一次传入参数Null，第二次才传入DOM元素*/}
+                        {/*不过这是无关紧要的，开发时推荐使用内联函数*/}
+                        <input type="text" ref={(inputDom)=>{this.inputDom = inputDom}} onBlur={this.onBlurHandle}/>
+                        {/*ref绑定类中的函数可以避免以上问题，只在创建组件时执行一次*/}
+                        <input type="text" ref={this.refCallback} onBlur={this.onBlurHandle}/>
+                    </div>
+                )
+            }
+        }
+        ReactDOM.render(<MyComponent/>, document.getElementById('root'));
+
+     </script>
+</body>
+</html>
