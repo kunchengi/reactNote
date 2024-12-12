@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3_createRef的使用</title>
+</head>
+<body>
+     <div id="root"></div>
+     <script type="text/javascript" src="../js/react.development.js"></script>
+     <script type="text/javascript" src="../js/react-dom.development.js"></script>
+     <script type="text/javascript" src="../js/babel.min.js"></script>
+
+     <script type="text/babel">
+
+        class MyComponent extends React.Component{
+
+            /**
+             * React.createRef()调用后返回一个ref对象
+             * 该对象上拥有current属性，该属性的值为对应的dom元素
+             * ref对象只能存一个dom元素，如果有多个元素使用看相同的ref对象，则存储最后一个元素
+             * 该方式是官方最推荐的方法
+             */
+
+            myInput = React.createRef();
+
+            onBlurHandle = () => {
+                // 获取ref属性对应的dom元素
+                console.log(this.myInput.current);// <input type="text">
+                console.log(this.myInput.current.value);
+            }
+            render(){
+                return (
+                    <div>
+                        {/*创建组件时会把input元素赋值给this.myInput.current*/}
+                        <input type="text" ref={this.myInput} onBlur={this.onBlurHandle}/>
+                    </div>
+                )
+            }
+        }
+        ReactDOM.render(<MyComponent/>, document.getElementById('root'));
+
+     </script>
+</body>
+</html>
