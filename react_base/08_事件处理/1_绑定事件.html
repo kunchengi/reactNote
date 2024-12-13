@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1_绑定事件</title>
+</head>
+<body>
+     <div id="root"></div>
+     <script type="text/javascript" src="../js/react.development.js"></script>
+     <script type="text/javascript" src="../js/react-dom.development.js"></script>
+     <script type="text/javascript" src="../js/babel.min.js"></script>
+
+     <script type="text/babel">
+        /**
+         * react中可以通过onXxx（注意大小写）属性绑定事件，值为事件处理函数（注意this指向）
+         * 为了更好的兼容性，react使用的是自定义（合成）事件，而不是使用原生的DOM事件
+         * 为了更高效，React的事件是通过事件委托方式处理的（委托给组件的根元素）
+         * 事件对象通过参数e表示，其中保存着事件相关信息，e.target表示当前正在操作的dom元素
+         * 
+        **/ 
+        class MyComponent extends React.Component{
+
+            onBlurHandle = (e) => {
+                // 获取ref属性对应的dom元素
+                console.log(e.target);// <input type="text">
+                console.log(e.target.value);
+            }
+
+            render(){
+                return (
+                    <div>
+                        {/*通过onBlur绑定失去焦点事件，触发时执行onBlurHandle函数*/}
+                        <input type="text" onBlur={this.onBlurHandle}/>
+                    </div>
+                )
+            }
+        }
+        ReactDOM.render(<MyComponent/>, document.getElementById('root'));
+
+     </script>
+</body>
+</html>
