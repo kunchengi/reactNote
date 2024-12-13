@@ -376,3 +376,55 @@ JavaScript 模块是一种组织代码的方式，允许将相关的功能封装
       }
   }
   ```
+
+## 受控组件和非受控组件
+
+### **非受控组件** (Uncontrolled Components):
+
+* 非受控组件是指表单元素的状态不由React管理，而是由DOM本身维护。
+* 使用非受控组件时，通常会通过`ref`来获取DOM元素的当前值。
+* 这种方式更接近传统的JavaScript处理表单的方式，但在React应用中使用较少，因为它们不如受控组件那样易于管理和测试。
+  ```jsx
+  class MyComponent extends React.Component{
+      inputRef = React.createRef();
+      spanRef = React.createRef();
+      onChangeHandle = () => {
+          this.spanRef.current.innerHTML = this.inputRef.current.value;
+      }
+      render(){
+          return (
+              <div>
+                  <input ref={this.inputRef} type="text" onChange={this.onChangeHandle}/>
+                  <span ref={this.spanRef}></span>
+              </div>
+          )
+      }
+  }
+  ```
+
+### **受控组件** (Controlled Components)
+
+* 在React中，当表单元素的状态由React组件的state管理时，这样的表单元素被称为受控组件。
+* 受控组件的值由React组件通过`value`属性控制，并且通过`onChange`事件处理器来响应用户的输入。
+* 每当用户输入数据时，组件的状态会更新，从而触发重新渲染，使表单元素显示最新的状态。
+  ```jsx
+  class MyComponent extends React.Component{
+      state={
+          value: ""
+      }
+      onChangeHandle = (e) => {
+          const value = e.target.value;
+          this.setState((prevState,props)=>{
+              return {value:value};
+          });
+      }
+      render(){
+          return (
+              <div>
+                  <input type="text" onChange={this.onChangeHandle}/>
+                  <span>{this.state.value}</span>
+              </div>
+          )
+      }
+  }
+  ```

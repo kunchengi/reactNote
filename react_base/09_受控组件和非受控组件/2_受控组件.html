@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2_受控组件</title>
+</head>
+<body>
+     <div id="root"></div>
+     <script type="text/javascript" src="../js/react.development.js"></script>
+     <script type="text/javascript" src="../js/react-dom.development.js"></script>
+     <script type="text/javascript" src="../js/babel.min.js"></script>
+
+     <script type="text/babel">
+        class MyComponent extends React.Component{
+            /**
+             * 在React中，当表单元素的状态由React组件的state管理时，这样的表单元素被称为受控组件。
+             * 受控组件的值由React组件通过`value`属性控制，并且通过`onChange`事件处理器来响应用户的输入。
+             * 每当用户输入数据时，组件的状态会更新，从而触发重新渲染，使表单元素显示最新的状态。
+             * 可以用此方式实现双向数据绑定。
+            **/
+
+            state={
+                value: ""
+            }
+            onChangeHandle = (e) => {
+                const value = e.target.value;
+                // 当输入框改变时，修改value的状态，再将最新的value渲染到页面上
+                this.setState((prevState,props)=>{
+                    return {value:value};
+                });
+            }
+
+            render(){
+                return (
+                    <div>
+                        <input type="text" onChange={this.onChangeHandle}/>
+                        <span>{this.state.value}</span>
+                    </div>
+                )
+            }
+        }
+        ReactDOM.render(<MyComponent/>, document.getElementById('root'));
+
+     </script>
+</body>
+</html>

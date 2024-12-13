@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1_非受控组件</title>
+</head>
+<body>
+     <div id="root"></div>
+     <script type="text/javascript" src="../js/react.development.js"></script>
+     <script type="text/javascript" src="../js/react-dom.development.js"></script>
+     <script type="text/javascript" src="../js/babel.min.js"></script>
+
+     <script type="text/babel">
+        class MyComponent extends React.Component{
+            /**
+             * 非受控组件是指表单元素的状态不由React管理，而是由DOM本身维护。
+             * 使用非受控组件时，通常会通过`ref`来获取DOM元素的当前值。
+             * 这种方式更接近传统的JavaScript处理表单的方式，但在React应用中使用较少，因为它们不如受控组件那样易于管理和测试。
+            **/
+
+            inputRef = React.createRef();
+            spanRef = React.createRef();
+
+            onChangeHandle = () => {
+                // 通过ref获取元素的当前值
+                this.spanRef.current.innerHTML = this.inputRef.current.value;
+            }
+
+            render(){
+                return (
+                    <div>
+                        <input ref={this.inputRef} type="text" onChange={this.onChangeHandle}/>
+                        <span ref={this.spanRef}></span>
+                    </div>
+                )
+            }
+        }
+        ReactDOM.render(<MyComponent/>, document.getElementById('root'));
+
+     </script>
+</body>
+</html>
