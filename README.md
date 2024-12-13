@@ -307,3 +307,72 @@ JavaScript 模块是一种组织代码的方式，允许将相关的功能封装
     name: PropTypes.string.isRequired
   };
   ```
+
+### refs
+
+#### 字符串形式的ref
+
+* 给标签设置ref属性，值为字符串，可以通过this.refs.myInput属性获取到对应的真实dom元素
+* 注意：这种写法不被react官方推荐使用，不建议使用，可能会在未来的版本中移除
+* 因为ref属性无法获取组件对象，只能获取dom元素，而且ref属性无法动态修改，只能设置一次
+  ```jsx
+  class MyComponent extends React.Component{
+      onBlurHandle = () => {
+          console.log(this.refs.myInput)
+          console.log(this.refs.myInput.value);
+      }
+      render(){
+          return (
+              <div>
+                  <input type="text" ref="myInput" onBlur={this.onBlurHandle}/>
+              </div>
+          )
+      }
+  }
+  ```
+
+#### 回调形式的ref
+
+* 给标签设置ref属性，值为回调函数，回调函数的第一个参数为对应的dom元素
+* 内联函数在创建组件时执行一次，往后每次更新会执行两次，第一次传入参数Null，第二次才传入DOM元素，不过这是无关紧要的，开发时推荐使用内联函数
+  ```jsx
+  class MyComponent extends React.Component{
+      onBlurHandle = () => {
+          console.log(this.inputDom);
+          console.log(this.inputDom.value);
+      }
+      refCallback = (inputDom) => {
+          this.inputDom = inputDom;
+      }
+      render(){
+          return (
+              <div>
+                  <input type="text" ref={(inputDom)=>{this.inputDom = inputDom}} onBlur={this.onBlurHandle}/>
+                  <input type="text" ref={this.refCallback} onBlur={this.onBlurHandle}/>
+              </div>
+          )
+      }
+  }
+  ```
+
+#### createRef的使用
+
+* React.createRef()调用后返回一个ref对象,该对象上拥有current属性，该属性的值为对应的dom元素
+* ref对象只能存一个dom元素，如果有多个元素使用看相同的ref对象，则存储最后一个元素
+* 该方式是官方最推荐的方法，但能通过其它方式获取dom元素，就不要使用ref
+  ```jsx
+  class MyComponent extends React.Component{
+      myInput = React.createRef();
+      onBlurHandle = () => {
+          console.log(this.myInput.current);
+          console.log(this.myInput.current.value);
+      }
+      render(){
+          return (
+              <div>
+                  <input type="text" ref={this.myInput} onBlur={this.onBlurHandle}/>
+              </div>
+          )
+      }
+  }
+  ```

@@ -19,7 +19,7 @@
              * React.createRef()调用后返回一个ref对象
              * 该对象上拥有current属性，该属性的值为对应的dom元素
              * ref对象只能存一个dom元素，如果有多个元素使用看相同的ref对象，则存储最后一个元素
-             * 该方式是官方最推荐的方法
+             * 该方式是官方最推荐的方法，但能通过其它方式获取dom元素，就不要使用ref
              */
 
             myInput = React.createRef();
