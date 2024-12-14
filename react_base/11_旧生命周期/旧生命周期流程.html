@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>旧生命周期流程</title>
+</head>
+<body>
+     <div id="root"></div>
+
+     <script type="text/javascript" src="../js/react.development.js"></script>
+     <script type="text/javascript" src="../js/react-dom.development.js"></script>
+     <script type="text/javascript" src="../js/babel.min.js"></script>
+
+     <script type="text/babel">
+        class Counter extends React.Component{
+            // 开始创建组件实例，会调用constructor方法
+            constructor(props){
+                console.log('开始创建组件实例');
+                super(props);
+                this.state = {
+                    count: 0
+                }
+            }
+
+            // 组件挂载前，会调用componentWillMount方法
+            componentWillMount(){
+                console.log('组件挂载前');
+            }
+
+            handleClick(){
+                this.setState((prevState, props)=>{
+                    return {count: prevState.count + 1}
+                })
+            }
+
+            handleForceClick(){
+                this.forceUpdate();
+            }
+
+            // 父组件render执行后，组件接收新的props前，会调用shouldComponentUpdate方法
+            // 即使父组件没有传props，也会调用该方法，也就是只要父组件更新，就会调用该方法
+            // 注意：第一次渲染时不会调用
+            componentWillReceiveProps(props){
+                console.log('组件接收到父组件传过来的新props：', props);
+                // 这里直接修改state，之后会调用shouldComponentUpdate方法去判断是否需要更新
+                this.state.count = props.count;
+            }
+
+            // 组件更新检测，调用this.setState后或者调用componentWillReceiveProps后会调用shouldComponentUpdate方法
+            // 返回true表示组件需要更新，随后会componentWillUpdate调用方法
+            // 返回false表示组件不需要更新，将会停止更新
+            // 如果没写shouldComponentUpdate方法，默认返回true
+            shouldComponentUpdate(){
+                console.log('组件更新检测');
+                if(this.state.count >= 3){
+                    // 虽然没更新页面，但是数据还是更新了
+                    return false;
+                }
+                return true;
+            }
+
+            // 组件更新前，通过更新检测或执行forceUpdate强制更新后会调用componentWillUpdate方法
+            componentWillUpdate(){
+                console.log('组件更新前');
+            }
+
+            // 组件每次渲染时，会调用render方法
+            render(){
+                console.log("渲染组件");
+                return (
+                    <div>
+                        <button onClick={this.handleRemove}>移除root节点下的组件</button>
+                        <div>
+                            <span>{this.state.count}</span>
+                            <button onClick={this.handleClick.bind(this)}>+1</button>
+                            <button onClick={this.handleForceClick.bind(this)}>不更新数据，强制更新</button>
+                        </div>
+                    </div>
+                )
+            }
+    
+            // 组件挂载完成，会调用componentDidMount方法
+            componentDidMount(){
+                console.log("组件挂载完成");
+            }
+
+            // 组件更新完成，会调用componentDidUpdate方法
+            componentDidUpdate(prevProps, prevState){
+                console.log("组件更新完成");
+                console.log(prevProps, prevState);
+            }
+
+            handleRemove = () => {
+                ReactDOM.unmountComponentAtNode(document.getElementById('root'));
+            }
+
+            // 组件卸载前，会调用componentWillUnmount方法
+            componentWillUnmount(){
+                console.log("组件卸载前");
+            }
+        }
+
+        // 父组件
+        class ParentComponent extends React.Component{
+            state = {
+                count: 0
+            }
+
+            handleClick = () => {
+                this.setState((prevState, props)=>{
+                    return {count: prevState.count}
+                })
+            }
+
+
+
+            render(){
+                return (
+                    <div>
+                        <button onClick={this.handleClick}>重置</button>
+                        <Counter count={this.state.count}/>
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(<ParentComponent/>, document.getElementById('root'));
+
+     </script>
+</body>
+</html>
