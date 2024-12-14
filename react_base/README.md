@@ -434,3 +434,39 @@ JavaScript 模块是一种组织代码的方式，允许将相关的功能封装
 * 组件卸载时，会依次调用以下方法：
 
   * componentWillUnmount ---- 一般在这做一些清理操作，例如：取消订阅、清除定时器、移除事件监听器等
+
+## 新生命周期（React 16.3 之后）
+
+* 废弃了componentWillMount、componentWillUpdate、componentWillReceiveProps方法
+  * 如果需要使用这些方法，需要加上UNSAFE_前缀
+* 新增了getDerivedStateFromProps、getSnapshotBeforeUpdate方法
+  * getDerivedStateFromProps是静态方法，不能使用this
+
+* 组件挂载时，会依次调用以下方法：
+
+  * constructor
+  * getDerivedStateFromProps
+    * constructor或者setState后，会调用该方法，返回值会合并state
+  * render
+  * componentDidMount
+
+* 执行setState或父组件更新执行render，会依次调用以下方法：
+
+  * getDerivedStateFromProps
+  * shouldComponentUpdate
+  * render
+  * getSnapshotBeforeUpdate
+    * 在组件更新前，会调用该方法，返回值会作为componentDidUpdate的第三个参数,用于获取组件更新前的状态,使用该方法时
+    * 使用该方法就不能使用废弃的componentWillMount、componentWillUpdate、componentWillReceiveProps方法
+  * componentDidUpdate
+
+* 执行forceUpdate时，会依次调用以下方法：
+
+  * getDerivedStateFromProps
+  * render
+  * getSnapshotBeforeUpdate
+  * componentDidUpdate
+
+* 组件卸载时，会依次调用以下方法：
+
+  * componentWillUnmount

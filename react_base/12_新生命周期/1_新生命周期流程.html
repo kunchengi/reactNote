@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1_新生命周期流程</title>
+</head>
+<body>
+     <div id="root"></div>
+
+     <script type="text/javascript" src="../newjs/react.development.js"></script>
+     <script type="text/javascript" src="../newjs/react-dom.development.js"></script>
+     <script type="text/javascript" src="../newjs/babel.min.js"></script>
+
+     <script type="text/babel">
+        class Counter extends React.Component{
+            // 开始创建组件实例，会调用constructor方法
+            constructor(props){
+                console.log('开始创建组件实例');
+                super(props);
+                this.state = {
+                    count: 0
+                }
+            }
+
+            // constructor或者setState后，会调用getDerivedStateFromProps方法
+            // 从props得到一个衍生的state，用于更新state
+            // 需要传入props和state
+            // 必须返回一个对象，用于更新state
+            // 当state取决于props时，才使用该方法，非必要不使用
+            static getDerivedStateFromProps(props, state){
+                console.log('constructor或者setState后');
+                // 返回的对象会与原来的state合并
+                return {name: props.name};
+            }
+
+            // 弃用componentWillMount
+            // 如果想使用，需要加上UNSAFE_前缀
+            // UNSAFE_componentWillMount(){
+            //     console.log('组件挂载前');
+            // }
+
+            handleClick(){
+                this.setState((prevState, props)=>{
+                    return {count: prevState.count + 1}
+                })
+            }
+
+            handleForceClick(){
+                this.forceUpdate();
+            }
+
+            // 弃用componentWillReceiveProps
+            // 如果想使用，需要加上UNSAFE_前缀
+            // UNSAFE_componentWillReceiveProps(props){
+            //     console.log('组件接收到父组件传过来的新props：', props);
+            //     // 这里直接修改state，之后会调用shouldComponentUpdate方法去判断是否需要更新
+            //     this.state.count = props.count;
+            // }
+
+            // 组件更新检测，调用this.setState后或者调用componentWillReceiveProps后会调用shouldComponentUpdate方法
+            // 返回true表示组件需要更新，随后会componentWillUpdate调用方法
+            // 返回false表示组件不需要更新，将会停止更新
+            // 如果没写shouldComponentUpdate方法，默认返回true
+            shouldComponentUpdate(){
+                console.log('组件更新检测');
+                if(this.state.count >= 3){
+                    // 虽然没更新页面，但是数据还是更新了
+                    return false;
+                }
+                return true;
+            }
+
+            // 弃用componentWillUpdate
+            // 如果想使用，需要加上UNSAFE_前缀
+            // UNSAFE_componentWillUpdate(){
+            //     console.log('组件更新前');
+            // }
+
+            // 组件每次渲染时，会调用render方法
+            render(){
+                console.log("渲染组件");
+                return (
+                    <div>
+                        <h1>{this.props.name}</h1>
+                        <button onClick={this.handleRemove}>移除root节点下的组件</button>
+                        <div>
+                            <span>{this.state.count}</span>
+                            <button onClick={this.handleClick.bind(this)}>+1</button>
+                            <button onClick={this.handleForceClick.bind(this)}>不更新数据，强制更新</button>
+                        </div>
+                    </div>
+                )
+            }
+    
+            // 组件挂载完成，会调用componentDidMount方法
+            componentDidMount(){
+                console.log("组件挂载完成");
+            }
+
+
+
+            // 在更新之前获取快照（更新DOM和refs之前）
+            // 返回值会作为第三个参数传递给componentDidUpdate方法
+            // 注意：使用该方法时，不能使用废弃的componentWillMount、componentWillUpdate、componentWillReceiveProps方法
+            getSnapshotBeforeUpdate(prevProps, prevState){
+                console.log('在更新之前获取快照');
+                return "快照";
+            }
+
+            // 组件更新完成，会调用componentDidUpdate方法
+            // 第一个参数prevProps是更新前的props
+            // 第二个参数prevState是更新前的state
+            // 第三个参数snapshot是getSnapshotBeforeUpdate方法的返回值
+            componentDidUpdate(prevProps, prevState, snapshot){
+                console.log("组件更新完成");
+                console.log(prevProps, prevState, snapshot);
+            }
+
+            handleRemove = () => {
+                ReactDOM.unmountComponentAtNode(document.getElementById('root'));
+            }
+
+            // 组件卸载前，会调用componentWillUnmount方法
+            componentWillUnmount(){
+                console.log("组件卸载前");
+            }
+        }
+
+
+        // 父组件
+        class ParentComponent extends React.Component{
+
+            handleClick = () => {
+                this.forceUpdate();
+            }
+
+            render(){
+                return (
+                    <div>
+                        <button onClick={this.handleClick}>刷新组件</button>
+                        <Counter name="张三"/>
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(<ParentComponent/>, document.getElementById('root'));
+
+     </script>
+</body>
+</html>

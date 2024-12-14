@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>getSnapshotBeforeUpdate使用场景</title>
+</head>
+<body>
+     <div id="root"></div>
+
+     <script type="text/javascript" src="../newjs/react.development.js"></script>
+     <script type="text/javascript" src="../newjs/react-dom.development.js"></script>
+     <script type="text/javascript" src="../newjs/babel.min.js"></script>
+
+     <script type="text/babel">
+        /*
+            使用场景：
+                1. 在组件更新之前获取滚动条的位置
+                2. 在组件更新之后，根据滚动条的位置来决定是否自动滚动
+        */
+        class Chat extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = { messages: [] };
+                this.messagesEndRef = React.createRef();
+            }
+
+            componentDidMount() {
+                // 模拟接收新消息
+                // 每秒新增一条消息, 并更新state,50秒后停止
+                this.interval = setInterval(() => {
+                    this.setState(prevState => ({
+                        messages: [...prevState.messages, `消息 ${prevState.messages.length + 1}`]
+                    }));
+                    if (this.state.messages.length >= 50) {
+                        clearInterval(this.interval);
+                    }
+                }, 1000);
+            }
+
+            getSnapshotBeforeUpdate(prevProps, prevState) {
+                // 在更新前获取滚动位置
+                if (prevState.messages.length < this.state.messages.length) {
+                    // scrollTop：滚动条距离顶部的距离
+                    // scrollHeight：滚动条的总高度
+                    // clientHeight：滚动条的可见高度
+                    const { scrollTop, scrollHeight, clientHeight } = this.messagesEndRef.current;
+                    console.log(scrollHeight - scrollTop);
+                    // 如果滚动条的总高度 - 滚动条距离顶部的距离 <= 滚动条的可见高度，则表示滚动条在底部
+                    return scrollHeight - scrollTop <= clientHeight;
+                }
+                return null;
+            }
+
+            componentDidUpdate(prevProps, prevState, snapshot) {
+                // 如果之前在底部，则滚动到最新消息，否则不滚动
+                if (snapshot) {
+                    this.messagesEndRef.current.scrollTop = this.messagesEndRef.current.scrollHeight - this.messagesEndRef.current.clientHeight;
+                }
+            }
+
+            render() {
+                /*创建一个消息列表，当消息列表滚动到底部时，新增消息后会自动滚动到底部，否则不滚动*/
+                return (
+                    <div style={{ width: '200px', height: '200px', backgroundColor: 'skyblue', overflow: 'auto' }} ref={this.messagesEndRef}>
+                        {this.state.messages.map((msg, index) => (
+                            <div key={index}>{msg}</div>
+                        ))}
+                    </div>
+                );
+            }
+        }
+
+        ReactDOM.render(<Chat />, document.getElementById('root'));
+
+     </script>
+</body>
+</html>
