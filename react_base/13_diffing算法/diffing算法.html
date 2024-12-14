@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>diffing算法</title>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/javascript" src="../newjs/react.development.js"></script>
+    <script type="text/javascript" src="../newjs/react-dom.development.js"></script>
+    <script type="text/javascript" src="../newjs/babel.min.js"></script>
+
+    <script type="text/babel">
+        class CarComponent extends React.Component {
+
+            state = {
+                cars: [
+                    { id: 0, name: "奔驰" },
+                    { id: 1, name: "宝马" }
+                ]
+            }
+            inputRef = React.createRef();
+
+            onClickHandle = () => {
+                const value = this.inputRef.current.value;
+                if (value) {
+                    const newCars = [{ id: this.state.cars.length, name: value }, ...this.state.cars];
+                    this.setState((prevState, props) => {
+                        return { cars: newCars };
+                    });
+                }
+            }
+
+            render() {
+                return (
+                    <div>
+                        <input ref={this.inputRef} type="text" />
+                        <button onClick={this.onClickHandle}>前面添加</button>
+                        {/* 用index作为key，可能会导致性能问题和数据错乱，因为index可能会发生变化，导致组件重新渲染 */}
+                        {this.state.cars.map((car,index)=> <CarItemComponent key={index} car={car}/>)}
+                        <br/>
+                        {/* 用id作为key，可以避免性能问题和数据错乱，因为id是唯一的，不会发生变化，导致组件重新渲染 */}
+                        {this.state.cars.map((car, index) => <CarItemComponent key={car.id} car={car}/>)}
+                    </div>
+                )
+            }
+        }
+
+        class CarItemComponent extends React.Component{
+            render(){
+                return (
+                    <div>
+                        <span>{this.props.car.name}</span>
+                        <input type="text" />
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(<CarComponent />, document.getElementById('root'));
+
+    </script>
+</body>
+
+</html>
