@@ -1,4 +1,6 @@
+// 引入logo图
 import logo from './logo.svg';
+// 引入样式
 import './App.css';
 
 function App() {
@@ -22,4 +24,5 @@ function App() {
   );
 }
 
+// 向外暴露一个APP组件
 export default App;
