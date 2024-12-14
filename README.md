@@ -57,7 +57,7 @@ React Developer Tools
 * 全局安装create-react-app
   * npm i -g create-react-app
 * 切换到想创建项目的目录,创建项目
-  * npx create-react-app react_staging
+  * create-react-app react_staging
 * 进入项目文件夹,启动项目
   * cd react_staging
   * npm start
