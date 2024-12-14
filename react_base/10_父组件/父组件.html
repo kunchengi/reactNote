@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>父组件</title>
+</head>
+<body>
+     <div id="root"></div>
+     <script type="text/javascript" src="../js/react.development.js"></script>
+     <script type="text/javascript" src="../js/react-dom.development.js"></script>
+     <script type="text/javascript" src="../js/babel.min.js"></script>
+
+     <script type="text/babel">
+        class CarComponent extends React.Component{
+
+            state={
+                cars: ["奔驰", "宝马", "奥迪"]
+            }
+            inputRef = React.createRef();
+
+            onClickHandle = () => {
+                const value = this.inputRef.current.value;
+                if(value){
+                    const newCars = [...this.state.cars, value];
+                    this.setState((prevState,props)=>{
+                        return {cars:newCars};
+                    });
+                }
+            }
+
+            render(){
+                return (
+                    <div>
+                        <input ref={this.inputRef} type="text"/>
+                        <button onClick={this.onClickHandle}>添加</button>
+                        {/* 将cars数组中的每一项传递给CarItemComponent组件 */}
+                        {this.state.cars.map((car,index)=><CarItemComponent key={index} car={car}/>)}
+                    </div>
+                )
+            }
+        }
+
+        class CarItemComponent extends React.Component{
+            render(){
+                return (
+                    <div>
+                        <span>{this.props.car}</span>
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(<CarComponent/>, document.getElementById('root'));
+
+     </script>
+</body>
+</html>
