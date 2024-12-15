@@ -68,3 +68,44 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+# 项目文档
+
+## 生成唯一id
+
+* 安装uuid / nanoid，推荐使用nanoid，因为更加轻量级
+  ```cmd
+  npm i nanoid
+  ```
+* 使用nanoid生成id
+  ```jsx
+    import { nanoid } from 'nanoid'
+    const id = nanoid()
+  ```
+
+## 类型限制
+
+* 安装prop-types
+    ```cmd
+    npm i prop-types
+    ```
+* 使用PropTypes
+  ```jsx
+    import PropTypes from 'prop-types'
+    class MyComponent extends React.Component {
+        static propTypes = {
+            name: PropTypes.string.isRequired,
+        }
+        render() {
+            return <div>{this.props.name}</div>
+        }
+    }
+  ```
+
+## 开发规范
+* 先引入第三方的库，再引入自己写的文件
+
+## 小知识
+* 【子组件】给【父组件】传递数据：父组件通过props传递函数给子组件，子组件调用这个函数，把数据传给父组件
+* checkbox中的defaultChecked只会在第一次渲染的时候生效，如果要动态控制，需要使用checked，且必须要绑定change事件，否则不会修改不了状态
