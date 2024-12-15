@@ -89,3 +89,9 @@ ERROR in ./src/reportWebVitals.js 5:4-24
 * src：源码文件夹
 * package.json：存储项目名称、版本、描述等配置
 * README.md：项目的说明文档，markdown格式
+
+## react插件
+* ES7+ React/Redux/React-Native snippets
+  * 快速生成react代码
+  * 输入rcc 创建一个类组件模板
+  * 输入rfc 创建一个函数组件模板
