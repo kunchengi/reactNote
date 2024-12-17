@@ -103,6 +103,37 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
     }
   ```
 
+## 网络请求
+* axios
+  * 轻量级的http请求库
+  * 可以在浏览器端和nodejs服务端使用
+* 安装axios
+  ```cmd
+  npm i axios
+  ```
+
+* 解决跨域问题
+  * 配置代理-方式1，只能配置一个代理
+    * 在package.json中配置proxy属性
+    ```JSON
+    "proxy":"http://localhost:5000"
+    ```
+  * 配置代理-方式2，可以配置多个代理
+    * 在src/setupProxy.js中配置代理
+    ```jsx
+      const { createProxyMiddleware } = require('http-proxy-middleware')
+      module.exports = function(app) {
+        app.use()
+      }
+    ```
+    * react脚手架会把这个文件的配置自动加到项目的webpack配置中
+    * 这个文件要符合commonjs规范
+    * 修改该文件后要重启服务
+
+* github搜索用户的api
+  * https://api.github.com/search/users?q=xxx
+  * 请求频繁会被拒
+
 ## 开发规范
 * 先引入第三方的库，再引入自己写的文件
 

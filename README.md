@@ -105,3 +105,9 @@ ERROR in ./src/reportWebVitals.js 5:4-24
     * 数据名称
     * 保存在哪个组件？
   * 交互：事件的处理
+
+## 请求服务器相关
+* 启动测试代理
+  ```cmd
+  node server.js
+  ```
