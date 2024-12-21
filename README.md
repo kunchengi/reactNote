@@ -76,7 +76,7 @@ React Developer Tools
 * 如果运行项目报以下错误
   * 错误信息：
     * Module not found: Error: Can't resolve 'web-vitals' in 'D:\ckc\note\reactNote\react_staging\src'
-ERROR in ./src/reportWebVitals.js 5:4-24
+      ERROR in ./src/reportWebVitals.js 5:4-24
   * 解决方案：
     * npm i web-vitals
     * 重新启动项目
@@ -91,12 +91,14 @@ ERROR in ./src/reportWebVitals.js 5:4-24
 * README.md：项目的说明文档，markdown格式
 
 ## react插件
+
 * ES7+ React/Redux/React-Native snippets
   * 快速生成react代码
   * 输入rcc 创建一个类组件模板
   * 输入rfc 创建一个函数组件模板
 
 ## 组件化编码流程
+
 * 拆分组件：拆分界面，抽取组件，组件命名
 * 实现静态组件：使用组件实现静态页面效果
 * 实现动态组件
@@ -107,17 +109,20 @@ ERROR in ./src/reportWebVitals.js 5:4-24
   * 交互：事件的处理
 
 ## 请求服务器相关
+
 * 启动测试代理
   ```cmd
   node server.js
   ```
 
 ## SPA单页应用（Single Page Application）
+
 * 整个应用只有一个页面
 * 点击页面中的链接（路由切换）不会刷新页面，只会局部更新页面
 * 数据都需要通过ajax请求获取，并渲染到页面中
 
 ## React路由
+
 * 路由：将url映射到UI组件
 * Hash路由
   * 地址中带#号，例如：http://localhost:3000/#/home
@@ -177,3 +182,19 @@ ERROR in ./src/reportWebVitals.js 5:4-24
 
         app.listen(3000);
       ```
+
+## 解决Git总是提示”您确定要继续连接吗（yes/no）
+* 在.ssh目录下创建config文件
+  ```bash
+    nano config
+  ```
+* 输入以下内容
+  ```plaintext
+    Host github.com
+      StrictHostKeyChecking no
+      UserKnownHostsFile /dev/null
+  ```
+* 保存退出
+  * 按 Ctrl + O 保存文件
+  * 按 Enter 确认文件
+  * 按 Ctrl + X 退出编辑模式
