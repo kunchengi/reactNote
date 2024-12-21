@@ -21,7 +21,10 @@ export default class TopBar extends Component {
                         <li><TopBarNavLink to="/about" activeClassName="active">关于我们</TopBarNavLink></li> */}
 
                         {/* 默认模糊匹配,先匹配/home,再匹配/home/a,最后匹配/home/a/b,所以能正常渲染/home路由的组件 */}
-                        <li><TopBarNavLink to="/home/a/b" activeClassName="active">首页</TopBarNavLink></li>
+                        {/* <li><TopBarNavLink to="/home/a/b" activeClassName="active">首页</TopBarNavLink></li> */}
+
+                        <li><TopBarNavLink to="/home" activeClassName="active">首页</TopBarNavLink></li>
+                        <li><TopBarNavLink to="/about" activeClassName="active">关于我们</TopBarNavLink></li>
                     </ul>
                 </nav>
             </div>

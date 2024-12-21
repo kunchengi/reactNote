@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 // import { Route,Switch } from 'react-router-dom'
-import { Route } from 'react-router-dom'
+import { Route, Redirect } from 'react-router-dom'
 import TopBar from './compoents/TopBar'// 一般组件
 import Home from './pages/Home'// 路由组件
 import About from './pages/About'// 路由组件
@@ -28,8 +28,13 @@ export default class App extends Component {
         {/* 如果加了exact属性，那么为精准匹配,只有当前url为 /home时才显示 Home组件 
         也可以只写exact
         精准匹配可能会导致无法匹配二级路由,非必要不使用精准匹配 */}
-        <Route exact={true} path="/home" component={Home} />
-        <Route exact path="/about" component={About} />
+        {/* <Route exact={true} path="/home" component={Home} />
+        <Route exact path="/about" component={About} /> */}
+
+        <Route path="/home" component={Home} />
+        <Route path="/about" component={About} />
+        {/* 放最后面,如果没有匹配到,则重定向到/home */}
+        <Redirect to="/home" />
       </div>
     )
   }
