@@ -111,3 +111,69 @@ ERROR in ./src/reportWebVitals.js 5:4-24
   ```cmd
   node server.js
   ```
+
+## SPA单页应用（Single Page Application）
+* 整个应用只有一个页面
+* 点击页面中的链接（路由切换）不会刷新页面，只会局部更新页面
+* 数据都需要通过ajax请求获取，并渲染到页面中
+
+## React路由
+* 路由：将url映射到UI组件
+* Hash路由
+  * 地址中带#号，例如：http://localhost:3000/#/home
+  * 实现机制：当URL中的 # 后面的部分发生变化时，浏览器不会向服务器发送请求，而是触发 hashchange 事件。React Router 监听这个事件并更新页面内容。
+  * 优点：
+    * 简单易用：不需要服务器端配置，适用于静态网站。
+    * 兼容性好：支持所有浏览器。
+  * 缺点：
+    * SEO 不友好：因为 URL 中包含 #，所以无法被搜索引擎收录。
+    * URL 不美观：因为 URL 中包含 #，所以 URL 不美观。
+* History路由
+  * 地址中不带#号，例如：http://localhost:3000/home
+  * 实现机制：
+    * 当用户点击链接时，React Router 会拦截事件，然后使用 history.pushState 或 history.replaceState 方法来修改URL并更新浏览器的历史记录
+    * 监听到路由变化时，React Router 会找到当前路由对应的组件。
+    * 然后调用组件的 componentDidMount 或 componentWillReceiveProps 方法，并更新页面内容。
+  * 优点：
+    * SEO 友好：因为 URL 中不包含 #，所以可以被搜索引擎收录，有利于SEO优化。
+    * URL 美观：因为 URL 中不包含 #，所以 URL 更美观。
+  * 缺点：
+    * 需要服务器端配置：为了确保刷新页面或直接访问某个路由时，服务器能够正确返回应用的HTML文件，需要进行相应的服务器端配置。
+    * 不支持IE9及以下版本：因为 History 路由需要使用 HTML5 的 history API，而IE9及以下版本不支持该API。
+  * 如果你选择使用History路由，需要在服务器端进行相应的配置。以下是一些常见服务器的配置示例：
+    * Nginx：
+      ```nginx
+        server {
+          listen 80;
+          server_name example.com;
+
+          location / {
+            try_files $uri $uri/ /index.html;
+          }
+        }
+      ```
+    * Apache：
+      ```apache
+        <IfModule mod_rewrite.c>
+        RewriteEngine On
+        RewriteBase /
+        RewriteRule ^index\.html$ - [L]
+        RewriteCond %{REQUEST_FILENAME} !-f
+        RewriteCond %{REQUEST_FILENAME} !-d
+        RewriteRule . /index.html [L]
+        </IfModule>
+      ```
+    * Node.js (Express)：
+      ```javascript
+        const express = require('express');
+        const path = require('path');
+        const app = express();
+
+        app.use(express.static(path.join(__dirname, 'build')));
+
+        app.get('*', (req, res) => {
+          res.sendFile(path.join(__dirname, 'build', 'index.html'));
+        });
+
+        app.listen(3000);
+      ```
