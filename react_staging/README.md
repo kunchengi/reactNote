@@ -194,3 +194,16 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
         ]
       };
     ```
+
+## 解决多级路由刷新页面后资源丢失问题
+* 原因
+  * 浏览器会从[http](http://localhost:3000)请求资源,自动映射到project/public/目录
+  * 如果请求[http](http://localhost:3000/favicon.ico)则会返回project/public/favicon.ico资源.如果没找到该资源,则会自动映射到project/src/index.html文件
+  * 但是当多级路由[http](http://localhost:3000/user/ckc)刷新页面时,浏览器会请求[http](http://localhost:3000/user/favicon.ico),由于没有public/user/favicon.ico资源,此时会返回project/src/index.html文件,导致资源丢失
+* 解决方法1
+  * 加载资源时不要带./,如"./css/bootstrap.css"改为"css/bootstrap.css"
+  * 因为带./会映射到当前路由的上一级目录,而不带./会映射到项目public根目录
+* 解决方法2
+  * 加载资源时写"%PUBLIC_URL%/css/bootstrap.css",会映射到项目public根目录
+* 解决方法3
+  * 使用hashRouter,因为hashRouter不会加载#号之后的路径,所以不会出现资源丢失问题
