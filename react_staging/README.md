@@ -147,6 +147,13 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
     PubSub.unsubscribe('xxx'); // 取消订阅
   ```
 
+## 路由
+* 安装react-router-dom的5.x.x版本
+  ```cmd
+  npm i react-router-dom@5
+  ```
+
+
 ## 开发规范
 * 先引入第三方的库，再引入自己写的文件
 

@@ -124,7 +124,7 @@ React Developer Tools
 ## React路由
 
 * 路由：将url映射到UI组件
-* Hash路由
+* Hash路由(HashRouter)
   * 地址中带#号，例如：http://localhost:3000/#/home
   * 实现机制：当URL中的 # 后面的部分发生变化时，浏览器不会向服务器发送请求，而是触发 hashchange 事件。React Router 监听这个事件并更新页面内容。
   * 优点：
@@ -133,7 +133,7 @@ React Developer Tools
   * 缺点：
     * SEO 不友好：因为 URL 中包含 #，所以无法被搜索引擎收录。
     * URL 不美观：因为 URL 中包含 #，所以 URL 不美观。
-* History路由
+* History路由(BrowserRouter)
   * 地址中不带#号，例如：http://localhost:3000/home
   * 实现机制：
     * 当用户点击链接时，React Router 会拦截事件，然后使用 history.pushState 或 history.replaceState 方法来修改URL并更新浏览器的历史记录
