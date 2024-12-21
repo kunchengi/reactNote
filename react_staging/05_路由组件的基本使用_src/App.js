@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-// import { Route,Switch } from 'react-router-dom'
-import { Route, Redirect } from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
+// import { Route, Redirect } from 'react-router-dom'
 import TopBar from './compoents/TopBar'// 一般组件
 import Home from './pages/Home'// 路由组件
 import About from './pages/About'// 路由组件
@@ -31,10 +31,12 @@ export default class App extends Component {
         {/* <Route exact={true} path="/home" component={Home} />
         <Route exact path="/about" component={About} /> */}
 
-        <Route path="/home" component={Home} />
-        <Route path="/about" component={About} />
-        {/* 放最后面,如果没有匹配到,则重定向到/home */}
-        <Redirect to="/home" />
+        <Switch>
+          <Route path="/home" component={Home} />
+          <Route path="/about" component={About} />
+          {/* 放最后面,如果没有匹配到,则重定向到/home */}
+          <Redirect to="/home" />
+        </Switch>
       </div>
     )
   }

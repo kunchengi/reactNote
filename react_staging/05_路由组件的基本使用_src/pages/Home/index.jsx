@@ -1,4 +1,9 @@
 import React, { Component } from 'react'
+import { Route, Switch, Redirect } from 'react-router-dom';
+import Sidebar from '../../compoents/Sidebar';
+import JavaScriptCom from './JavaScriptCom';
+import ReactCom from './ReactCom';
+import './Home.css'; // 引入CSS文件
 
 export default class Home extends Component {
 
@@ -8,7 +13,17 @@ export default class Home extends Component {
   }
   render() {
     return (
-      <div>主页</div>
+      <div className="home-container">
+        <Sidebar /> {/* 使用Sidebar组件 */}
+        <div className="content">
+          <Switch>
+            <Route path="/home/javascript" component={JavaScriptCom} />
+            <Route path="/home/react" component={ReactCom} />
+            {/* 放最后面,如果没有匹配到,则重定向到/home/javascript */}
+            <Redirect to="/home/javascript" />
+          </Switch>
+        </div>
+      </div>
     )
   }
 }
