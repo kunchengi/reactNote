@@ -134,9 +134,23 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
   * https://api.github.com/search/users?q=xxx
   * 请求频繁会被拒
 
+## 消息订阅-发布机制
+* 安装PubSubJS
+  ```cmd
+  cnpm i pubsub-js
+  ```
+* 使用
+  ```jsx
+    import PubSub from 'pubsub-js';// 引入
+    PubSub.subscribe('xxx', (msg, data) => {}); // 订阅
+    PubSub.publish('xxx', data); // 发布
+    PubSub.unsubscribe('xxx'); // 取消订阅
+  ```
+
 ## 开发规范
 * 先引入第三方的库，再引入自己写的文件
 
 ## 小知识
 * 【子组件】给【父组件】传递数据：父组件通过props传递函数给子组件，子组件调用这个函数，把数据传给父组件
 * checkbox中的defaultChecked只会在第一次渲染的时候生效，如果要动态控制，需要使用checked，且必须要绑定change事件，否则不会修改不了状态
+* 如果包裹了StrictMode，会执行两次渲染
