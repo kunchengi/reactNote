@@ -152,10 +152,20 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
   ```cmd
   npm i react-router-dom@5
   ```
-
+## 路由组件与一般组件的区别(5.x.x版的react-router-dom)
+* 写法不同
+  * 一般组件：<Dome/>
+  * 路由组件：<Route path="" component={Dome}/>
+* 存放位置不同(开发规范)
+  * 一般组件：src/components
+  * 路由组件：src/pages
+* 接收的props不同
+  * 一般组件：传递了什么就收到什么
+  * 路由组件：接到三个固定属性:{ history: {…}, location: {…}, match: {…}}
 
 ## 开发规范
 * 先引入第三方的库，再引入自己写的文件
+* 路由组件一般放在src/pages目录下
 
 ## 小知识
 * 【子组件】给【父组件】传递数据：父组件通过props传递函数给子组件，子组件调用这个函数，把数据传给父组件
