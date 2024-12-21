@@ -171,3 +171,26 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 * 【子组件】给【父组件】传递数据：父组件通过props传递函数给子组件，子组件调用这个函数，把数据传给父组件
 * checkbox中的defaultChecked只会在第一次渲染的时候生效，如果要动态控制，需要使用checked，且必须要绑定change事件，否则不会修改不了状态
 * 如果包裹了StrictMode，会执行两次渲染
+
+## 特殊问题
+### 解决babel-preset-react-app 依赖警告问题
+* 警告信息
+  ``` cmd
+    One of your dependencies, babel-preset-react-app, is importing the "@babel/plugin-proposal-private-property-in-object" package without declaring it in its dependencies. This is currently working because "@babel/plugin-proposal-private-property-in-object" is already in your node_modules folder for unrelated reasons, but it may break at any time.
+
+    babel-preset-react-app is part of the create-react-app project, which is not maintianed anymore. It is thus unlikely that this bug will ever be fixed. Add "@babel/plugin-proposal-private-property-in-object" to your devDependencies to work around this error. This will make this message go away.
+  ```
+* 解决步骤
+  * 安装 @babel/plugin-proposal-private-property-in-object：
+    ```cmd
+      npm i @babel/plugin-proposal-private-property-in-object
+    ```
+  * 配置 babel.config.js 文件,如果没有该文件,先在项目根目录创建
+    ```js
+      module.exports = {
+        presets: ['react-app'],
+        plugins: [
+          ['@babel/plugin-proposal-private-property-in-object', { loose: true }]
+        ]
+      };
+    ```
