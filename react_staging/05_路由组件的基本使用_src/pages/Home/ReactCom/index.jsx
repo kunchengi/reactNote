@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import qs from 'qs';
+// import qs from 'qs';
 
 export default class ReactCom extends Component {
   render() {
@@ -11,8 +11,12 @@ export default class ReactCom extends Component {
     // const content = result.get('content');
 
     // 接收search参数，并使用qs解析
-    const { content } = qs.parse(this.props.location.search, { ignoreQueryPrefix: true });
+    // const { content } = qs.parse(this.props.location.search, { ignoreQueryPrefix: true });
     
+    // 接收state参数
+    const state = this.props.location.state || {};
+    const content = state.content || '';
+
     return (
       <div>{content}</div>
     )

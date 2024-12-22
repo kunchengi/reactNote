@@ -25,9 +25,12 @@ export default class Home extends Component {
             {/* <Redirect to={`/home/javascript/${"数组的方法"}`} /> */}
 
             {/* search参数不需要声明，会自动添加到组件的props.location.search中 */}
+            {/* state参数也不需要声明，会自动添加到组件的props.location.state中 */}
             <Route path="/home/javascript" component={JavaScriptCom} />
             <Route path="/home/react" component={ReactCom} />
-            <Redirect to={`/home/javascript?content=${"数组的方法"}`} />
+            {/* <Redirect to={`/home/javascript?content=${"数组的方法"}`} /> */}
+            {/* <Redirect to={{pathname: '/home/javascript', search: `?content=数组的方法`}} /> */}
+            <Redirect to={{pathname: '/home/javascript', state: {content:'数组的方法'}}} />
           </Switch>
         </div>
       </div>

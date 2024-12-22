@@ -201,6 +201,10 @@ React Developer Tools
       ```jsx
         <Link to={`/detail?id=${item.id}`}>查看</Link>
       ```
+      或者
+      ```jsx
+        <Link to={{ pathname: '/detail', search: `?id=${item.id}` }}>查看</Link>
+      ```
     * 无需声明参数
     * 在路由组件中接收参数：
       ```jsx
@@ -211,6 +215,21 @@ React Developer Tools
       ```jsx
         import qs from 'qs';
         const { content } = qs.parse(this.props.location.search, { ignoreQueryPrefix: true });
+      ```
+  * 传递state参数
+    * 该方式不会将参数添加（显示）到URL中。但会将传递的state参数保存在组件的props.location.state和history.location.state中
+    * state参数默认为undefined
+    * 由于BrowserRouter操作的是history对象，所以state参数也会保存到浏览器的history对象中，在页面刷新后并不会丢失，页面的状态也会保存下来。但如果浏览器关闭或者清空缓存，则state参数会丢失。
+    * 由于以上原因，读取state参数时，一般要判空并默认返回一个空对象。否则可能会报错
+    * 在Link中携带参数：
+      ```jsx
+        <Link to={{ pathname: '/detail', state: { id: item.id } }}>查看</Link>
+      ```
+    * 无需声明参数
+    * 在路由组件中接收参数：
+      ```jsx
+        const state = this.props.location.state || {};
+        const id = state.id || '';
       ```
 
 ## 解决Git总是提示”您确定要继续连接吗（yes/no）
