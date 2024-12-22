@@ -44,13 +44,19 @@ export default class Sidebar extends Component {
 
                 {/* 向路由组件传递state参数
                 将对象{pathname: path, state: {}}赋值给to属性，当匹配到/home/javascript时，会把state参数赋值给组件的props.location.state */}
-                {this.state.courseList.map(item => (
+                {/* {this.state.courseList.map(item => (
                     <TopBarNavLink key={item.id} to={{ pathname: item.path, state: { content: item.content }}} className="nav-button">
                         {item.name}
                     </TopBarNavLink>
+                ))} */}
+
+                {/* react的路由默认为push模式，当从/home/javascript跳转到/home/react时，浏览器会记录一条历史记录，当点击浏览器的回退按钮时，会回到/home/javascript页面
+                当添加了replace属性后，当从/home/javascript跳转到/home/react时，浏览器会当前的历史记录，点击浏览器的回退按钮时，不会回到/home/javascript页面，而是回到/home/javascript之前的页面 */}
+                {this.state.courseList.map(item => (
+                    <TopBarNavLink replace key={item.id} to={{ pathname: item.path, state: { content: item.content }}} className="nav-button">
+                        {item.name}
+                    </TopBarNavLink>
                 ))}
-
-
             </div>
         )
     }
