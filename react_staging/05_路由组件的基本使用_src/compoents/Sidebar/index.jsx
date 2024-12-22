@@ -20,8 +20,16 @@ export default class Sidebar extends Component {
 
                 {/* 向路由组件传递params参数
                 在url后面加上content参数，当匹配到/home/javascript/:content时，会把content参数赋值给组件的props.match.params.content */}
-                {this.state.courseList.map(item => (
+                {/* {this.state.courseList.map(item => (
                     <TopBarNavLink key={item.id} to={`${item.path}/${item.content}`} className="nav-button">
+                        {item.name}
+                    </TopBarNavLink>
+                ))} */}
+
+                {/* 向路由组件传递search参数
+                在url后面加上?id=xxx&content=xxx，当匹配到/home/javascript时，会把id和content参数赋值给组件的props.location.search */}
+                {this.state.courseList.map(item => (
+                    <TopBarNavLink key={item.id} to={`${item.path}?content=${item.content}`} className="nav-button">
                         {item.name}
                     </TopBarNavLink>
                 ))}

@@ -196,6 +196,22 @@ React Developer Tools
       ```jsx
         const { id } = this.props.match.params;
       ```
+  * 传递search(query)参数
+    * 在Link中携带参数：
+      ```jsx
+        <Link to={`/detail?id=${item.id}`}>查看</Link>
+      ```
+    * 无需声明参数
+    * 在路由组件中接收参数：
+      ```jsx
+        const query = new URLSearchParams(this.props.location.search);
+        const id = query.get('id');
+      ```
+      或者
+      ```jsx
+        import qs from 'qs';
+        const { content } = qs.parse(this.props.location.search, { ignoreQueryPrefix: true });
+      ```
 
 ## 解决Git总是提示”您确定要继续连接吗（yes/no）
 * 在.ssh目录下创建config文件
