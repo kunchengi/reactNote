@@ -17,11 +17,13 @@ export default class Home extends Component {
         <Sidebar /> {/* 使用Sidebar组件 */}
         <div className="content">
           <Switch>
-            {/* 在url后面加上/:content,会将url传过来的content参数存到组件的props.match.params.content中 */}
+            {/* 声明params参数
+            在url后面加上/:content,会将url传过来的content参数存到组件的props.match.params.content中 */}
             <Route path="/home/javascript/:content" component={JavaScriptCom} />
             <Route path="/home/react/:content" component={ReactCom} />
-            {/* 放最后面,如果没有匹配到,则重定向到/home/javascript */}
-            <Redirect to="/home/javascript" />
+             {/* 这里也需要携带参数，由于是教学，先写死 */}
+            <Redirect to={`/home/javascript/${"数组的方法"}`} />
+
           </Switch>
         </div>
       </div>

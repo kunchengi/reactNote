@@ -18,7 +18,8 @@ export default class Sidebar extends Component {
                 {/* <TopBarNavLink to="/home/javascript" className="nav-button">JavaScript</TopBarNavLink>
                 <TopBarNavLink to="/home/react" className="nav-button">React</TopBarNavLink> */}
 
-                {/* 在url后面加上content参数，当匹配到/home/javascript/:content时，会把content参数赋值给组件的props.match.params.content */}
+                {/* 向路由组件传递params参数
+                在url后面加上content参数，当匹配到/home/javascript/:content时，会把content参数赋值给组件的props.match.params.content */}
                 {this.state.courseList.map(item => (
                     <TopBarNavLink key={item.id} to={`${item.path}/${item.content}`} className="nav-button">
                         {item.name}

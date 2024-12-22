@@ -182,6 +182,20 @@ React Developer Tools
 
         app.listen(3000);
       ```
+* 向路由组件传递参数
+  * 传递param参数
+    * 在Link中携带参数：
+      ```jsx
+        <Link to={`/detail/${item.id}`}>查看</Link>
+      ```
+    * 在Route中声明参数：
+      ```jsx
+        <Route path="/detail/:id" component={Detail} />
+      ```
+    * 在路由组件中接收参数：
+      ```jsx
+        const { id } = this.props.match.params;
+      ```
 
 ## 解决Git总是提示”您确定要继续连接吗（yes/no）
 * 在.ssh目录下创建config文件
