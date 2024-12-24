@@ -182,6 +182,17 @@ React Developer Tools
 
         app.listen(3000);
       ```
+* HashRouter 和 BrowserRouter 的区别：
+  * 底层实现方式不同：
+    * HashRouter 使用 URL 的 hash 部分作为路由标识。
+    * BrowserRouter 使用 HTML5 的 history API，不兼容IE9及以下版本。
+  * url 的格式不同：
+    * HashRouter 的url包含#，例如：http://localhost:3000/#/home。
+    * BrowserRouter 的url不包含#，例如：http://localhost:3000/home。
+  * 刷新后对路由state参数的影响：
+    * HashRouter 在刷新页面后，路由state参数会丢失。
+    * BrowserRouter 在刷新页面后，路由state参数不会丢失，因为路由组件的state参数是保存在浏览器的history对象中的。
+
 * 向路由组件传递参数
   * 传递param参数
     * 在Link中携带参数：
