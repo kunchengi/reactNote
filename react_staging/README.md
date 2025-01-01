@@ -207,3 +207,17 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
   * 加载资源时写"%PUBLIC_URL%/css/bootstrap.css",会映射到项目public根目录
 * 解决方法3
   * 使用hashRouter,因为hashRouter不会加载#号之后的路径,所以不会出现资源丢失问题
+
+# React UI 组件库
+* material-ui(国外)
+  * 官网：https://material-ui.com/zh/
+  * github：https://github.com/mui-org/material-ui
+* ant-design(国内蚂蚁金服)
+  * 官网：https://ant.design/index-cn
+  * github：https://github.com/ant-design/ant-design
+  * 安装
+    ```cmd
+      npm i antd
+    ```
+* UI 组件库的使用要学会查官方文档，不需要死记硬背
+* 由于UI 组件库一直在更新，每个版本的用法都有所不同，具体要看项目使用版本的文档
