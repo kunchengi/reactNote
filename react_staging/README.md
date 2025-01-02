@@ -214,6 +214,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
   * github：https://github.com/mui-org/material-ui
 * ant-design(国内蚂蚁金服)
   * 官网：https://ant.design/index-cn
+  * 按需引入参考文档：https://3x.ant.design/docs/react/use-in-typescript-cn
   * github：https://github.com/ant-design/ant-design
   * 安装
     ```cmd
