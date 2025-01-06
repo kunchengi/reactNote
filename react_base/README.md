@@ -402,6 +402,7 @@ JavaScript 模块是一种组织代码的方式，允许将相关的功能封装
 * 常见的高阶函数有： Promise、setTimeout、Array.map等
 
 ## 旧生命周期（React 16.3 之前）
+![alt text](./image/react生命周期(旧).png)
 
 * 组件挂载时，会依次调用以下方法：
 
@@ -436,6 +437,7 @@ JavaScript 模块是一种组织代码的方式，允许将相关的功能封装
   * componentWillUnmount ---- 一般在这做一些清理操作，例如：取消订阅、清除定时器、移除事件监听器等
 
 ## 新生命周期（React 16.3 之后）
+![alt text](./image/react生命周期(新).png)
 
 * 废弃了componentWillMount、componentWillUpdate、componentWillReceiveProps方法
   * 如果需要使用这些方法，需要加上UNSAFE_前缀

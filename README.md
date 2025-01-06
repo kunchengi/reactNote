@@ -258,3 +258,46 @@ React Developer Tools
   * 按 Ctrl + O 保存文件
   * 按 Enter 确认文件
   * 按 Ctrl + X 退出编辑模式
+
+## redux
+* redux是什么？
+  * redux是一个状态管理库，用于管理应用中的状态。（不是react的库）
+  * 它可以用在React、Vue、Angular等框架中，但基本与react配合使用。
+  * 可以集中管理react应用中多个组件共享的状态。
+* 什么情况下需要使用redux
+  * 共享：某个组件的状态，需要给其他组件使用时。
+  * 通信：当某个组件的属性发生变化时，需要通知其他组件更新时。
+  * 状态管理：当应用状态复杂时，需要使用redux进行状态管理。
+  * 总体原则：能不用就不用。
+* 学习文档
+  * 英文文档：https://redux.js.org/
+  * 中文文档：https://www.redux.org.cn/
+  * GitHub：https://github.com/reduxjs/redux
+* redux的三个核心概念
+  * 原理图
+    ![alt text](./image/redux原理图.png)
+  * action
+    * 动作的对象
+    * 包含2个属性
+      * type：动作类型，字符串，唯一，必要属性
+      * data：动作携带的数据，任意类型，可选属性
+    * 例子：{type:'ADD_STUDENT',data:{name:'张三',age:18}}
+  * reducer
+    * 纯函数
+    * 用于初始化状态、修改状态
+    * 接收两个参数
+      * state：当前状态，默认值是undefined
+      * action：动作对象
+    * 返回值：新的状态
+  * store
+    * 将state、action、reducer联系在一起的对象
+    * 如何得到此对象
+      ```javascript
+        import {createStore} from 'redux'
+        import reducer from './reducer'
+        const store = createStore(reducer)
+      ```
+    * 此对象的功能
+      * getState：得到state状态
+      * dispatch：发送一个action，触发reducer调用，产生新的state
+      * subscribe：监听state值的变化，一旦变化，就调用回调函数
