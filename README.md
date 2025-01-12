@@ -301,3 +301,8 @@ React Developer Tools
       * getState：得到state状态
       * dispatch：发送一个action，触发reducer调用，产生新的state
       * subscribe：监听state值的变化，一旦变化，就调用回调函数
+* 安装redux
+  ```bash
+    npm install redux
+    npm i @reduxjs/toolkit
+  ```
