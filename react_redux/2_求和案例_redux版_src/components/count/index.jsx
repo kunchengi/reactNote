@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 // 引入store，用于获取store保存的数据
 import store from '../../redux/store';
-import { createIncrementAction, createDecrementAction } from '../../redux/countAction';
+import { createIncrementAction, createDecrementAction, createIncrementAsyncAction } from '../../redux/countAction';
 
 export default class Count extends Component {
 
@@ -41,9 +41,8 @@ export default class Count extends Component {
     }
     incrementAsync = ()=>{
         const selectNum = Number(this.selectNumber.value);
-        setTimeout(()=>{
-            store.dispatch(createIncrementAction(selectNum))
-        })
+        // 调用异步action
+        store.dispatch(createIncrementAsyncAction(selectNum, 1000)) // 1000毫秒后增加
     }
     render() {
         return (
