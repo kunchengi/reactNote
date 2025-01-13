@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 // 引入store，用于获取store保存的数据
 import store from '../../redux/store';
+import { createIncrementAction, createDecrementAction } from '../../redux/countAction';
 
 export default class Count extends Component {
 
@@ -22,18 +23,12 @@ export default class Count extends Component {
     increment = ()=>{
         const selectNum = Number(this.selectNumber.value);
         // 通知redux，将最新的count保存到store中，并刷新页面
-        store.dispatch({
-            type: 'increment',
-            data: selectNum
-        })
+        store.dispatch(createIncrementAction(selectNum))
     }
 
     decrement = ()=>{
         const selectNum = Number(this.selectNumber.value);
-        store.dispatch({
-            type: 'decrement',
-            data: selectNum
-        })
+        store.dispatch(createDecrementAction(selectNum))
     }
 
     incrementIfOdd = ()=>{
@@ -41,19 +36,13 @@ export default class Count extends Component {
         if(oldCount % 2 !== 0)
         {
             const selectNum = Number(this.selectNumber.value);
-            store.dispatch({
-                type: 'increment',
-                data: selectNum
-            })
+            store.dispatch(createIncrementAction(selectNum))
         }
     }
     incrementAsync = ()=>{
         const selectNum = Number(this.selectNumber.value);
         setTimeout(()=>{
-            store.dispatch({
-                type: 'increment',
-                data: selectNum
-            })
+            store.dispatch(createIncrementAction(selectNum))
         })
     }
     render() {

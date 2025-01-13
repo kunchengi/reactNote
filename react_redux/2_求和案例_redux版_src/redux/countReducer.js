@@ -4,6 +4,8 @@
  *      preState：之前的状态值
  *      action：动作对象{type:'increment',data:1}
  */
+import { INCREMENT, DECREMENT } from './constant'
+
 // 如果preState没有传，即初始化时，默认为0
 const initState = 0;
 export default function countReducer(preState = initState, action) {
@@ -11,9 +13,9 @@ export default function countReducer(preState = initState, action) {
     const { type, data } = action;
     // 根据type决定如何加工数据
 	switch (type) {
-		case 'increment':
+		case INCREMENT:
 			return preState + data;
-		case 'decrement':
+		case DECREMENT:
 			return preState - data;
 		default:// 如果没有匹配的type，就返回原数据，例如：初始化时
 			return preState;
