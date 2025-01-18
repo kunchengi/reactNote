@@ -306,3 +306,5 @@ React Developer Tools
     npm install redux
     npm i @reduxjs/toolkit
   ```
+* react-redux模型图
+  ![alt text](./image/react-redux模型图.png)

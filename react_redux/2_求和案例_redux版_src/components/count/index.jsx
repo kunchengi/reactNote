@@ -1,64 +1,57 @@
-import React, { Component } from 'react'
-// 引入store，用于获取store保存的数据
-import store from '../../redux/store';
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { createIncrementAction, createDecrementAction, createIncrementAsyncAction } from '../../redux/countAction';
 
-export default class Count extends Component {
+/**
+ * useSelector、useDispatch钩子不能在类组件使用，只能使用函数式组件
+ * useSelector
+ *  用于在函数组件中从 Redux store 中选择并读取数据
+ *  它使得组件可以订阅 Redux store 的状态变化，并在状态变化时重新渲染。
+ *  通过 memoization（记忆化）技术避免不必要的重新渲染。
+ *  相比于传统的 connect 方法，useSelector 使代码更加简洁和直观。
+ * useDispatch
+ *  用于获取 Redux store 的 dispatch 方法。
+ */
+export default function Count() {
+    // 获取state中的count数据
+    const count = useSelector(state => state.count);
+    // 获取state的dispatch方法
+    const dispatch = useDispatch();
 
-    state = {
-        name: 'count',
-        count: store.getState().count // 初始化state中的count
-    }
+    const increment = () => {
+        const selectNum = Number(document.getElementById('selectNumber').value);
+        dispatch(createIncrementAction(selectNum));
+    };
 
-    componentDidMount() {
-        // 监听store中的数据变化，并刷新页面
-        // 只要store中的数据变化，就会执行subscribe中的回调函数，并把最新的数据传递给回调函数
-        store.subscribe(()=>{
-            this.setState({
-                count: store.getState().count
-            })
-        })
-    }
+    const decrement = () => {
+        const selectNum = Number(document.getElementById('selectNumber').value);
+        dispatch(createDecrementAction(selectNum));
+    };
 
-    increment = ()=>{
-        const selectNum = Number(this.selectNumber.value);
-        // 通知redux，将最新的count保存到store中，并刷新页面
-        store.dispatch(createIncrementAction(selectNum))
-    }
-
-    decrement = ()=>{
-        const selectNum = Number(this.selectNumber.value);
-        store.dispatch(createDecrementAction(selectNum))
-    }
-
-    incrementIfOdd = ()=>{
-        const oldCount = this.state.count;
-        if(oldCount % 2 !== 0)
-        {
-            const selectNum = Number(this.selectNumber.value);
-            store.dispatch(createIncrementAction(selectNum))
+    const incrementIfOdd = () => {
+        if (count % 2 !== 0) {
+            const selectNum = Number(document.getElementById('selectNumber').value);
+            dispatch(createIncrementAction(selectNum));
         }
-    }
-    incrementAsync = ()=>{
-        const selectNum = Number(this.selectNumber.value);
-        // 调用异步action
-        store.dispatch(createIncrementAsyncAction(selectNum, 1000)) // 1000毫秒后增加
-    }
-    render() {
-        return (
-            <div>
-                <h1>当前求和为：{this.state.count}</h1>
-                {/* 下拉框 */}
-                <select ref={c => this.selectNumber = c}>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                </select>
-                <button onClick={this.increment}>+</button>
-                <button onClick={this.decrement}>-</button>
-                <button onClick={this.incrementIfOdd}>当前求和为奇数再加</button>
-                <button onClick={this.incrementAsync}>异步加</button>
-            </div>
-        )
-    }
+    };
+
+    const incrementAsync = () => {
+        const selectNum = Number(document.getElementById('selectNumber').value);
+        dispatch(createIncrementAsyncAction(selectNum, 1000)); // 1000毫秒后增加
+    };
+
+    return (
+        <div>
+            <h1>当前求和为：{count}</h1>
+            <select id="selectNumber">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+            <button onClick={increment}>+</button>
+            <button onClick={decrement}>-</button>
+            <button onClick={incrementIfOdd}>当前求和为奇数再加</button>
+            <button onClick={incrementAsync}>异步加</button>
+        </div>
+    );
 }
