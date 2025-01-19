@@ -10,6 +10,7 @@ export default function Person() {
     const nameInput = useRef();
     const ageInput = useRef();
 
+    const count = useSelector(state => state.count);
     // 获取state中的persons数据
     const persons = useSelector(state => state.persons);
     const dispatch = useDispatch();
@@ -27,7 +28,7 @@ export default function Person() {
     }
     return (
         <div>
-            <h2>Person组件</h2>
+            <h2>Person组件，当前求和为：{count}</h2>
             <input ref={nameInput} type="text" placeholder='姓名' />
             <input ref={ageInput} type="text" placeholder='年龄' />
             <button onClick={addPerson}>添加</button>

@@ -16,6 +16,7 @@ export default function Count() {
     const selectNumberRef = useRef();
     // 获取state中的count数据
     const count = useSelector(state => state.count);
+    const personsLen = useSelector(state => state.persons.length);
     // 获取state的dispatch方法
     const dispatch = useDispatch();
 
@@ -43,7 +44,7 @@ export default function Count() {
 
     return (
         <div>
-            <h2>Count组件</h2>
+            <h2>Count组件，总人数为{personsLen}</h2>
             <h4>当前求和为：{count}</h4>
             <select ref={selectNumberRef}>
                 <option value="1">1</option>
