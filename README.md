@@ -308,3 +308,15 @@ React Developer Tools
   ```
 * react-redux模型图
   ![alt text](./image/react-redux模型图.png)
+
+## 纯函数
+* 概念：
+  * 函数式编程：把函数当做参数传递、返回函数、函数内部有return语句，都是函数式编程。
+  * 纯函数：函数式编程中的一种函数，它的执行结果 solely（ solely：完全）依赖它的参数，而且没有任何副作用。
+    * 不能修改传入参数，不能有随机性，不能有外部变量的引用，不能有外部函数的调用。
+    * 不能有定时器、ajax请求、console.log、setTimeout等函数调用。
+    * 每次输入相同参数必须得到相同结果。
+* 为什么不用push，shift，unshift等方法？而是用slice，concat,[...perState,data]等方式
+  * 因为它们是修改原数组，自动渲染页面用的是浅比较，由于原state的引用地址未发生变化，所以无法触发组件的更新。
+  * 纯函数返回新数组，会触发组件的更新。
+* redux的reducer函数必须是纯函数。
