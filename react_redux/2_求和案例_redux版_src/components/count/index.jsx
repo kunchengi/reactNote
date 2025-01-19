@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { createIncrementAction, createDecrementAction, createIncrementAsyncAction } from '../../redux/actions/count';
+import { increment, decrement, incrementAsync } from '../../redux/actions/count';
 
 /**
  * useSelector、useDispatch钩子不能在类组件使用，只能使用函数式组件
@@ -20,26 +20,26 @@ export default function Count() {
     // 获取state的dispatch方法
     const dispatch = useDispatch();
 
-    const increment = () => {
+    const onIncrement = () => {
         const selectNum = Number(selectNumberRef.current.value);
-        dispatch(createIncrementAction(selectNum));
+        dispatch(increment(selectNum));
     };
 
-    const decrement = () => {
+    const onDecrement = () => {
         const selectNum = Number(selectNumberRef.current.value);
-        dispatch(createDecrementAction(selectNum));
+        dispatch(decrement(selectNum));
     };
 
-    const incrementIfOdd = () => {
+    const onIncrementIfOdd = () => {
         if (count % 2 !== 0) {
             const selectNum = Number(selectNumberRef.current.value);
-            dispatch(createIncrementAction(selectNum));
+            dispatch(increment(selectNum));
         }
     };
 
-    const incrementAsync = () => {
+    const onIncrementAsync = () => {
         const selectNum = Number(selectNumberRef.current.value);
-        dispatch(createIncrementAsyncAction(selectNum, 1000)); // 1000毫秒后增加
+        dispatch(incrementAsync(selectNum, 1000)); // 1000毫秒后增加
     };
 
     return (
@@ -51,10 +51,10 @@ export default function Count() {
                 <option value="2">2</option>
                 <option value="3">3</option>
             </select>
-            <button onClick={increment}>+</button>
-            <button onClick={decrement}>-</button>
-            <button onClick={incrementIfOdd}>当前求和为奇数再加</button>
-            <button onClick={incrementAsync}>异步加</button>
+            <button onClick={onIncrement}>+</button>
+            <button onClick={onDecrement}>-</button>
+            <button onClick={onIncrementIfOdd}>当前求和为奇数再加</button>
+            <button onClick={onIncrementAsync}>异步加</button>
         </div>
     );
 }

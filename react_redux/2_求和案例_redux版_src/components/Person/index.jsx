@@ -4,7 +4,7 @@
 import { nanoid } from '@reduxjs/toolkit';
 import React, { useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { createAddPersonAction } from '../../redux/actions/person'
+import { addPerson } from '../../redux/actions/person'
 
 export default function Person() {
     const nameInput = useRef();
@@ -16,12 +16,12 @@ export default function Person() {
     const dispatch = useDispatch();
 
     // 添加人员
-    const addPerson = () => {
+    const onAddPerson = () => {
         const id = nanoid();
         const name = nameInput.current.value;
         const age = ageInput.current.value;
         // 派发action
-        dispatch(createAddPersonAction({ id, name, age }));
+        dispatch(addPerson({ id, name, age }));
         // 清空输入框
         nameInput.current.value = '';
         ageInput.current.value = '';
@@ -31,7 +31,7 @@ export default function Person() {
             <h2>Person组件，当前求和为：{count}</h2>
             <input ref={nameInput} type="text" placeholder='姓名' />
             <input ref={ageInput} type="text" placeholder='年龄' />
-            <button onClick={addPerson}>添加</button>
+            <button onClick={onAddPerson}>添加</button>
             <ul>
                 {persons.map(person => <li key={person.id}>{person.name} - {person.age}</li>)}
             </ul>
