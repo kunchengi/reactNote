@@ -4,7 +4,7 @@
  *      preState：之前的状态值
  *      action：动作对象{type:'increment',data:1}
  */
-import { INCREMENT, DECREMENT } from './constant'
+import { INCREMENT, DECREMENT } from '../constant'
 
 // 如果preState没有传，即初始化时，默认为0
 const initState = 0;

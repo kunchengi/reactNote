@@ -4,11 +4,13 @@
 
 // 引入createStore，专门用于创建redux中最为核心的store对象
 import { configureStore } from '@reduxjs/toolkit';
-import countReducer from './countReducer';
+import count from './reducers/count';
+import persons from './reducers/person';
 
 const store = configureStore({
   reducer: {
-    count: countReducer,
+    count,
+    persons,
   },
 });
 
