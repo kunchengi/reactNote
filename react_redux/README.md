@@ -68,3 +68,20 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## 项目打包部署运行
+  * 项目打包：
+    ```bash
+      npm run build
+    ```
+  * 项目部署：
+    * 方式1：编写nodejs服务，将打包后的文件部署到服务器上。
+    * 方式2：使用serve
+      * 安装serve
+        ```bash
+          npm install -g serve
+        ```
+      * 进入在build的上级目录，执行
+        ```bash
+          serve -s build
+        ```

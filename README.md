@@ -323,20 +323,3 @@
   * 因为它们是修改原数组，自动渲染页面用的是浅比较，由于原state的引用地址未发生变化，所以无法触发组件的更新。
   * 纯函数返回新数组，会触发组件的更新。
 * redux的reducer函数必须是纯函数。
-
-## 项目打包部署运行
-  * 项目打包：
-    ```bash
-      npm run build
-    ```
-  * 项目部署：
-    * 方式1：编写nodejs服务，将打包后的文件部署到服务器上。
-    * 方式2：使用serve
-      * 安装serve
-        ```bash
-          npm install -g serve
-        ```
-      * 进入在build的上级目录，执行
-        ```bash
-          serve -s build
-        ```
