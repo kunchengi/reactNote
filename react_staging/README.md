@@ -222,3 +222,11 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
     ```
 * UI 组件库的使用要学会查官方文档，不需要死记硬背
 * 由于UI 组件库一直在更新，每个版本的用法都有所不同，具体要看项目使用版本的文档
+
+## Hooks
+* Hook是React 16.8版本引入的新特性，它可以让你在函数组件中使用 state 以及其他的 React 特性
+
+### 三个常用的Hooks
+* useState
+* useEffect
+* useRef
