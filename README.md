@@ -20,10 +20,13 @@
 
 ## 工具
 
-React Developer Tools
+* React Developer Tools
+  * 安装：谷歌浏览器 --> 扩展程序 --> 访问chrome应用商店 --> 搜索React Developer Tools --> 添加到扩展程序
+  * 使用：开发者模式 --> Components（查看react组件）和Profiler（记录网站的性能）
+* Redux DevTools
+  * 安装：谷歌浏览器 --> 扩展程序 --> 访问chrome应用商店 --> 搜索Redux DevTools --> 添加到扩展程序
+  * 使用：开发者模式 --> Redux DevTools
 
-* 安装：谷歌浏览器 --> 扩展程序 --> 访问chrome应用商店 --> 搜索React Developer Tools --> 添加到扩展程序
-* 使用：开发者模式 --> Components（查看react组件）和Profiler（记录网站的性能）
 
 ## 虚拟DOM
 
