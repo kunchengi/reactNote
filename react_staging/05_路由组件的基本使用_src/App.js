@@ -1,9 +1,13 @@
-import React, { Component } from 'react'
+import React, { Component,lazy,Suspense } from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
 // import { Route, Redirect } from 'react-router-dom'
 import TopBar from './compoents/TopBar'// 一般组件
-import Home from './pages/Home'// 路由组件
-import About from './pages/About'// 路由组件
+// import Home from './pages/Home'// 路由组件
+// import About from './pages/About'// 路由组件
+
+// 懒加载路由组件，当路由匹配时才加载
+const Home = lazy(() => import('./pages/Home'))
+const About = lazy(() => import('./pages/About'))
 
 export default class App extends Component {
   render() {
@@ -31,12 +35,18 @@ export default class App extends Component {
         {/* <Route exact={true} path="/home" component={Home} />
         <Route exact path="/about" component={About} /> */}
 
-        <Switch>
-          <Route path="/home" component={Home} />
-          <Route path="/about" component={About} />
-          {/* 放最后面,如果没有匹配到,则重定向到/home */}
-          <Redirect to="/home" />
-        </Switch>
+        {/* 使用Suspense包裹路由组件，在加载过程中显示fallback的内容 */}
+        <Suspense fallback={<div>Loading...</div>}>
+        {/* fallback也可以使用组件 */}
+        {/* <Suspense fallback={<Loading />}> */}
+          <Switch>
+            {/* 注册路由 */}
+            <Route path="/home" component={Home} />
+            <Route path="/about" component={About} />
+            {/* 放最后面,如果没有匹配到,则重定向到/home */}
+            <Redirect to="/home" />
+          </Switch>
+        </Suspense>
       </div>
     )
   }
