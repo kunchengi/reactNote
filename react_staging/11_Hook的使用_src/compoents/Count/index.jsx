@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 
 
 /**
@@ -27,25 +27,50 @@ export default function Count({ unmount }) {
      * 注意：只能监听setCount(preCount => preCount + 1)的更新，不能监听setCount(count + 1)的更新
      */
 
-    useEffect(() => {
-        console.log('初次渲染');
-        const timer = setInterval(() => {
-            setCount(preCount => preCount + 1);
-        }, 500);
-        // 组件销毁前执行返回的回调函数
-        return () => {
-            console.log('组件销毁前');
-            clearInterval(timer);
-        }
-    }, [])
+    // useEffect(() => {
+    //     console.log('初次渲染');
+    //     const timer = setInterval(() => {
+    //         setCount(preCount => preCount + 1);
+    //     }, 500);
+    //     // 组件销毁前执行返回的回调函数
+    //     return () => {
+    //         console.log('组件销毁前');
+    //         clearInterval(timer);
+    //     }
+    // }, [])
 
+    // // 错误方式
+    // const checkCount = () => {
+    //     if (count > 5) {
+    //         setCount(0);
+    //     }
+    // }
 
-    useEffect(() => {
-        console.log('count更新');
+    // useEffect(() => {
+    //     console.log('count更新');
+    //     // 调用非useCallback声明的函数，会报警告，因为每次渲染都会重新声明checkCount函数，不能确保函数引用不变
+    //     checkCount();
+    // }, [count, checkCount])// 这里也要传checkCount，否则会警告
+
+    /**
+     * useCallback
+     *  它用于缓存函数，避免在每次渲染时都创建新的函数实例。
+     *  这对于传递给子组件的回调函数特别有用，可以防止子组件不必要的重新渲染。
+     *  第一个参数为回调函数
+     *  第二个参数为依赖项
+     *      不传时，每次渲染都会创建新的函数实例，与不使用useCallback相同
+     *      传空数组时，只在组件初始化时创建一次
+     *      当回调函数需要使用某个状态或props时，需要将该状态或props作为依赖项传入
+     */
+    const checkCount = useCallback(() => {
         if (count > 5) {
             setCount(0);
         }
-    }, [count])
+    },[count]);
+
+    useEffect(() => {
+        checkCount();
+    }, [count, checkCount])
 
     const increment = () => {
         // 传入最新状态，修改count状态值

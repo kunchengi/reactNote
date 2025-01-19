@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import Count from './compoents/Count'
 
 export default function App() {
@@ -6,9 +6,14 @@ export default function App() {
   const [isShowCount, setIsShowCount] = useState(true);
 
   // 卸载Count组件
-  const unmount = () => {
+  /**
+   * 使用 useCallback传入空数组，只在组件初始化时创建一次
+   * 可以确保 increment 函数在父组件重新渲染时不会被重新创建
+   * 从而避免 ChildComponent 的不必要的重新渲染。
+   */
+  const unmount = useCallback(() => {
     setIsShowCount(false);
-  }
+  },[])
 
   return (
     <div>
