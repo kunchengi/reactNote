@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useCallback,useRef } from 'react'
 
 
 /**
@@ -27,17 +27,25 @@ export default function Count({ unmount }) {
      * 注意：只能监听setCount(preCount => preCount + 1)的更新，不能监听setCount(count + 1)的更新
      */
 
-    // useEffect(() => {
-    //     console.log('初次渲染');
-    //     const timer = setInterval(() => {
-    //         setCount(preCount => preCount + 1);
-    //     }, 500);
-    //     // 组件销毁前执行返回的回调函数
-    //     return () => {
-    //         console.log('组件销毁前');
-    //         clearInterval(timer);
-    //     }
-    // }, [])
+    /**
+     * useRef
+     *  使用useRef时，会返回一个对象，对象中有current属性，current属性中存储的是组件中的DOM元素
+     *  useRef可以获取组件中的DOM元素，也可以用于存储一些数据，如：定时器ID等
+     */
+    // 在这里用Ref存储定时器ID
+    const timerRef = useRef(null); // 创建一个useRef来存储定时器ID
+
+    useEffect(() => {
+        console.log('初次渲染');
+        timerRef.current = setInterval(() => {
+            setCount(preCount => preCount + 1);
+        }, 500);
+        // 组件销毁前执行返回的回调函数
+        return () => {
+            console.log('组件销毁前');
+            clearInterval(timerRef.current);
+        }
+    }, [])
 
     // // 错误方式
     // const checkCount = () => {
@@ -80,11 +88,21 @@ export default function Count({ unmount }) {
         setCount(preCount => preCount + 1);
     }
 
+    // 使用useRef存储DOM元素
+    const inputRef = useRef();
+
+    const showInput = ()=>{
+        const value = inputRef.current.value;
+        alert(value);
+    }
+
     return (
         <div>
             <h2>当前求和为{count}</h2>
             <button onClick={increment}>点我+1</button>
             <button onClick={unmount}>卸载组件</button>
+            <input type="text" ref={inputRef}/>
+            <button onClick={showInput}>显示输入</button>
         </div>
     )
 }
