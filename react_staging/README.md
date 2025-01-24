@@ -230,3 +230,52 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 * useState
 * useEffect
 * useRef
+
+## 组件间的通信方式
+* props，父子间通信
+  * 普通props
+    ```jsx
+      <A name={name}></A>
+    ```
+  * children props
+    ```jsx
+      <A> 数据 </A>
+      <A> <B/> </A>
+    ```
+  * render props
+    ```jsx
+      <A>{(data) => <B data={data}/>}</A>
+    ```
+* 发布订阅模式，任意组件间通信
+  * pubs-subs、event等
+* 集中式管理，任意组件间通信
+  * redux、mobx等
+* context，后代组件间通信
+  * 创建Context
+    ```jsx
+      const MyContext = createContext();
+      const { Provider,Consumer } = MyContext;
+    ```
+  * 使用Provider将数据传递给后代组件
+    ```jsx
+      <Provider value={{name:'zhangsan',age:18}}>
+        <MyComponent/>
+      </Provider>
+    ```
+  * 后代组件接收数据
+    * 使用context属性接收数据
+      ```jsx
+        static contextType = MyContext;
+        <h2>{ this.context.userName }</h2>
+      ```
+    * 使用Consumer接收数据
+      ```jsx
+        <Consumer>
+          {(value)=>{<h2>value.name</h2>}}
+        </Consumer>
+      ```
+
+* 比较好的组件通信方式
+  * 父子组件：props
+  * 兄弟组件：发布订阅模式、集中式状态管理
+  * 祖孙组件（跨级组件）：发布订阅模式、集中式状态管理、context（开发用的少，封装插件用的多）
