@@ -68,8 +68,8 @@
   * 打开 package.json 文件，找到 dependencies 部分，将 react 和 react-dom 的版本修改为 "18.2.0"，例如：
     ```json
     "dependencies": {
-      "react": "18.2.0",
-      "react-dom": "18.2.0",
+      "react": "18.3.1",
+      "react-dom": "18.3.1",
       // 其他依赖...
     }
     ```
