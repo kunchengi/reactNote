@@ -148,6 +148,11 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
   ```
 
 ## 路由
+* React Router 以三个不同的包发布到NPM：
+  * react-router：路由核心库，提供了路由的核心功能，比如路由的切换、匹配、跳转等。
+  * react-router-dom：路由的DOM组件，包含react-router的所有内容，并提供了一些用于渲染路由的组件，比如NavLink、Link、Route、Switch等。
+  * react-router-native：路由的移动端组件，包含react-router的所有内容，并提供了一些用于React Native的API，例如：`NativeRouter`
+
 * 安装react-router-dom的5.x.x版本
   ```cmd
   npm i react-router-dom@5

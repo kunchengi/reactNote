@@ -68,3 +68,15 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## 与React Router 5.x的区别
+* 内置组件的变化：移除`<Switch/>`，使用`<Routes/>`代替，移除`<Redirect/>`，使用`<Navigate/>`代替 等
+* 语法的变化： `component={About}`变为`element={<About/>}` 等
+* 新增多个hooks：useParams、useSearchParams、useNavigate、useLocation 等
+* 官方明确推荐函数式组件！！！
+
+## 安装
+* 安装react-router-dom的6.x.x版本
+  ```cmd
+  npm i react-router-dom@6
+  ```
