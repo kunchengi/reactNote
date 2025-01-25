@@ -36,3 +36,7 @@ html {
 .nav-links a:hover {
     color: #61dafb;
 }
+
+.nav-links .active {
+    color: #61dafb;
+}
