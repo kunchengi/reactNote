@@ -9,7 +9,8 @@ function App() {
       {/* 注册路由：必须使用Routes包裹路由组件，其它与Switch组件一样 */}
       <Routes>
         <Route path="/home" element={<Home />} />
-        <Route path="/about" element={<About />} />
+        {/* caseSensitive为是否区分大小写,默认为false,写了只会就会区分大小写 */}
+        <Route path="/ABOUT" caseSensitive element={<About />} />
       </Routes>
     </div>
   );
