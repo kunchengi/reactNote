@@ -16,6 +16,8 @@ export default function TopBar() {
                     isActive为true时,表示当前路由是激活的,否则不是激活的
                     初次渲染时,会调用该函数,以后每次点击任意路由时,也会调用该函数 */}
                     {/* <li><NavLink className={(activeObj) => activeObj.isActive ? 'active' : ''} to="/home">首页</NavLink></li> */}
+                    {/* 如果加了end属性,则跳转到子路由时,这个按钮不会变为激活状态 */}
+                    {/* <li><NavLink className={getClassName} to="/home" end>首页</NavLink></li> */}
                     <li><NavLink className={getClassName} to="/home">首页</NavLink></li>
                     {/* 点击时跳转到/about路由 */}
                     <li><NavLink className={getClassName}  to="/about">关于我们</NavLink></li>
