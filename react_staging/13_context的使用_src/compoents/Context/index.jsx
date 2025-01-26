@@ -1,4 +1,4 @@
-import React, { Component,createContext } from 'react'
+import React, { Component,createContext,useContext } from 'react'
 import './index.css'
 
 // 创建一个上下文
@@ -52,7 +52,8 @@ export class C extends Component {
     }
 }
 
-// 函数式组件接收数据，只能使用 Consumer
+// 函数式组件接收数据，只能使用 Consumer 和 useContext
+// Consumer
 function D() {
   return (
     <div className='grand2'>
@@ -60,8 +61,20 @@ function D() {
         <Consumer>
             {value => <h2>A组件的name为:{ value.userName }，age为:{value.age}</h2>}
         </Consumer>
+        <E />
     </div>
   )
+}
+
+// useContext
+function E() {
+    const user = useContext(MyContext)
+    return (
+        <div className='grand2'>
+            <h1>E</h1>
+            <h2>A组件的name为:{user.userName}，age为:{user.age}</h2>
+        </div>
+    )
 }
 
 // 在应用开发中一般不用context，而是使用context封装的组件库，如：react-redux
