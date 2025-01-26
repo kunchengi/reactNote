@@ -1,5 +1,5 @@
 import React from 'react'
-import { Outlet, useNavigationType, useOutlet } from 'react-router-dom';
+import { Outlet, useNavigationType, useOutlet, useResolvedPath } from 'react-router-dom';
 import Sidebar from '../../compoents/Sidebar';
 import './Home.css';
 export default function Home() {
@@ -17,6 +17,12 @@ export default function Home() {
      * 如果嵌套路由挂载（渲染），返回子路由组件对象
      */
     console.log(useOutlet());
+
+    /**
+     * 解析任意路径，返回一个对象
+     */
+    const { pathname , search } = useResolvedPath('/home/reactcom?id=123');
+    console.log(`pathname=${pathname},search=${search}`);// 输出：pathname=/home/reactcom,search=?id=123
 
     return (
         <div className="home-container">
