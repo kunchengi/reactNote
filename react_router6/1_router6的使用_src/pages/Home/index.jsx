@@ -1,5 +1,5 @@
 import React from 'react'
-import { Outlet, useNavigationType } from 'react-router-dom';
+import { Outlet, useNavigationType, useOutlet } from 'react-router-dom';
 import Sidebar from '../../compoents/Sidebar';
 import './Home.css';
 export default function Home() {
@@ -10,6 +10,13 @@ export default function Home() {
      *  REPLACE
      */
     console.log(useNavigationType());
+
+    /**
+     * 获取当前路由的子路由组件对象
+     * 如果嵌套路由没有挂载（渲染），返回null
+     * 如果嵌套路由挂载（渲染），返回子路由组件对象
+     */
+    console.log(useOutlet());
 
     return (
         <div className="home-container">
