@@ -236,6 +236,10 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 * useEffect
 * useRef
 
+### react hooks的使用规则
+* hooks只能在函数式组件中或其它自定义Hooks中调用
+* hooks只能在函数式组件的顶层调用，不能在if、for或者嵌套函数中调用
+
 ## 组件间的通信方式
 * props，父子间通信
   * 普通props
