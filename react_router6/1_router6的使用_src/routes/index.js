@@ -24,7 +24,8 @@ const routers = [
             {
                 path: '/home',
                 // element: <Navigate to='/home/javascript/JavaScript/数组的方法' />// 2. 携带params参数
-                element: <Navigate to='/home/javascript?name=JavaScript&content=数组的方法' />
+                // element: <Navigate to='/home/javascript?name=JavaScript&content=数组的方法' />
+                element: <Navigate to='/home/javascript' state={{ name: 'JavaScript', content: '数组的方法' }} />
             }
         ]
     },

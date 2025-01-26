@@ -32,8 +32,15 @@ export default function Sidebar() {
             ))} */}
 
             {/* 1. 在Link中携带search(query)参数 */}
-            {courseList.map(item => (
+            {/* {courseList.map(item => (
                 <NavLink key={item.id} to={`${item.path}?name=${item.name}&content=${item.content}`} className={getClassName}>
+                    {item.name}
+                </NavLink>
+            ))} */}
+
+            {/* 1. 在Link中携带state参数 */}
+            {courseList.map(item => (
+                <NavLink key={item.id} to={item.path} state={{ name: item.name, content: item.content }} className={getClassName}>
                     {item.name}
                 </NavLink>
             ))}
