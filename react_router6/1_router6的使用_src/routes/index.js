@@ -12,16 +12,19 @@ const routers = [
         // 1. 定义子路由
         children: [
             {
-                path: 'javascript/:name/:content',// 1. 声明params参数
+                // path: 'javascript/:name/:content',// 1. 声明params参数
+                path: 'javascript',
                 element: <JavaScriptCom />
             },
             {
-                path: 'react/:name/:content',// 1. 声明params参数
+                // path: 'react/:name/:content',// 1. 声明params参数
+                path: 'react',
                 element: <ReactCom />
             },
             {
                 path: '/home',
-                element: <Navigate to='/home/javascript/JavaScript/数组的方法' />// 2. 携带params参数
+                // element: <Navigate to='/home/javascript/JavaScript/数组的方法' />// 2. 携带params参数
+                element: <Navigate to='/home/javascript?name=JavaScript&content=数组的方法' />
             }
         ]
     },

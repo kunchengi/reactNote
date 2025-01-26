@@ -25,8 +25,15 @@ export default function Sidebar() {
             <NavLink to="react" className={getClassName}>react</NavLink> */}
 
             {/* 2. 在Link中携带params参数 */}
-            {courseList.map(item => (
+            {/* {courseList.map(item => (
                 <NavLink key={item.id} to={`${item.path}/${item.name}/${item.content}`} className={getClassName}>
+                    {item.name}
+                </NavLink>
+            ))} */}
+
+            {/* 1. 在Link中携带search(query)参数 */}
+            {courseList.map(item => (
+                <NavLink key={item.id} to={`${item.path}?name=${item.name}&content=${item.content}`} className={getClassName}>
                     {item.name}
                 </NavLink>
             ))}
