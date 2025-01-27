@@ -69,7 +69,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
-## mobx-state-tree
+## MobX-State-Tree
 
 ### 文档
 
@@ -77,8 +77,39 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 * [mobx-state-tree官方文档](https://mobx-state-tree.js.org/)
 * [mobx-state-tree中文文档](https://juejin.cn/post/7097755866543161351)
 
+### 副作用
+
+* 副作用是指在函数执行过程中，除了返回值之外，还对外部环境产生了影响
+* 例如：修改全局变量、修改DOM、发送网络请求、打印日志等
+* 在 React 中，副作用通常指的是组件渲染之外的操作，比如数据获取、订阅、手动更改 DOM 等
+
+### 什么是MobX-State-Tree
+
+* 是一个状态管理库
+  * 集中存储数据
+  * 数据是可修改且受保护的
+  * 数据的变化是可序列化的、可追踪的，这使它拥有时间旅行功能
+  * 拥有副作用管理，可以在不使用useEffect等钩子的情况下，也可以管理数据更新后执行的副作用
+  * 运行时数据类型检查
+  * 数据规范化：MST支持引用，可以在应用程序代码中规范化数据
+
+### MST和MobX的关系
+
+* MobX是一个状态管理“引擎”，而MobX- state - tree是一辆豪车
+* MST为您提供了实现目标所需的结构、工具和其他功能
+* MST在底层使用MobX，所以MobX- state - tree可以与React、React Native、Vue、Angular、Svelte甚至是JavaScript应用的MobX绑定一起工作
+* 并需要知道如何使用MobX，就可以使用MST。就像你不需要知道你的汽车引擎是如何工作的，也成为一个优秀的司机
+
 ### 安装mobx、mobx-react-lite、mobx-state-tree
 
 ```bash
     npm i mobx mobx-react-lite mobx-state-tree
 ```
+
+### 开发者工具
+
+* mobx-devtools
+
+### 类型文档
+
+* [mobx-state-tree-types](https://mobx-state-tree.js.org/overview/types)
