@@ -65,7 +65,7 @@
   * cd react_staging
   * npm start
 * 可以通过以下步骤指定react版本
-  * 打开 package.json 文件，找到 dependencies 部分，将 react 和 react-dom 的版本修改为 "18.2.0"，例如：
+  * 打开 package.json 文件，找到 dependencies 部分，将 react 和 react-dom 的版本修改为 "18.3.1"，例如：
     ```json
     "dependencies": {
       "react": "18.3.1",
@@ -327,3 +327,48 @@
 ## 错误边界ErrorBoundary
 * 把错误限制在组件内部，避免整个应用崩溃。
 * 用于捕获后代组件生命周期产生的错误，渲染出备用UI。
+
+## 路径解析配置
+* 使用craco配置路径
+  * 安装依赖
+    ```bash
+      npm i -D @craco/craco
+    ```
+  * 根目录创建craco.config.js文件
+    ```javascript
+      const path = require('path');
+      module.exports = {
+        webpack: {
+            alias: {
+                '@': path.resolve(__dirname, 'src'),
+            },
+        }
+      }
+    ```
+  * package.json文件中配置启动和打包命令
+    ```json
+      "scripts": {
+        "start": "craco start",
+        "build": "craco build",
+      }
+    ```
+  * 使用别名路径导入文件
+    ```jsx
+      import {Button} from '@/components/Button';
+    ```
+
+## 联想路径配置
+  * 根目录新增jsconfig.json文件
+  * 添加路径提升配置
+    ```json
+      {
+        "compilerOptions": {
+          "baseUrl": "./",
+          "paths": {
+            "@/*": [
+              "src/*"
+            ]
+          }
+        }
+      }
+    ```
