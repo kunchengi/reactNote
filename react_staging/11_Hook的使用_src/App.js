@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useMemo } from 'react'
 import Count from './compoents/Count'
 
 export default function App() {
@@ -14,6 +14,23 @@ export default function App() {
   const unmount = useCallback(() => {
     setIsShowCount(false);
   },[])
+
+  /**
+   * useMemo
+   *  类似计算属性，会返回计算结果
+   *  可以避免在每次渲染时都执行一些昂贵的计算或创建新的对象
+   *  允许你缓存计算结果，只有在依赖项发生变化时才会重新计算。
+   */
+  const [ userList ] = useState([
+    { id: 1, name: '张三', age: 15 },
+    { id: 2, name: '李四', age: 19 },
+    { id: 3, name: '王五', age: 20 },
+  ]);
+  // 计算出18岁以上的用户
+  const adult = useMemo(() => {
+    return  userList.filter(item => item.age >= 18)
+  }, [userList]);
+  console.log(adult);// [ { id: 2, name: '李四', age: 19 }, { id: 3, name: '王五', age: 20 } ]
 
   return (
     <div>
