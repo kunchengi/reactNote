@@ -3,6 +3,7 @@ import { values } from 'mobx';
 import { nanoid } from 'nanoid'
 import { undo, redo } from '../../store';
 import TodoItem from '../TodoItem';
+import TodoCounter from '../TodoCounter';
 
 /**
  * 优化:引入TodoItem组件,提升渲染性能
@@ -19,6 +20,7 @@ const Todo = observer((props) => (
         {values(props.store.todos).map((todo,id) => (
             <TodoItem key={id} todo={todo} />
         ))}
+        <TodoCounter store={props.store} />
     </div>
 ));
 
