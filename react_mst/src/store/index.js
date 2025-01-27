@@ -9,6 +9,16 @@ const Todo = types
     .model({
         name: types.optional(types.string, ''),
         done: types.optional(types.boolean, false),
+        /**
+         * 引用user模型，存的是User的id，读的时候会自动解析为User模型
+         * types.maybe: 表示该属性是可选的，可以为null或undefined
+         * types.reference: 用来引用其他模型，这里引用的是User模型
+         * types.late: 表示该属性是一个延迟加载的模型，只有在需要时才会加载，这样能延迟User的解析，直到User被创建。
+         *             如果不使用late，User会立即被解析，如果User不存在，会报错
+         * 使用引用还有一个好处，如果你不小心删除了 model，而这个 model 被某个计算属性所引用，MST 会直接抛出一个错误！
+         * 如果你试图移除一个被引用的 user，你会得到这样的结果:Failed to resolve reference of type <late>: '1'
+         */
+        user: types.maybe(types.reference(types.late(() => User)))
     })
     // 调用actions,创建action
     // self: 永远指向当前的model
@@ -17,16 +27,35 @@ const Todo = types
         setName(newName) {
             self.name = newName;
         },
-
         // 切换done状态
         toggle() {
             self.done = !self.done;
         },
+        /**
+         * 设置user
+         * 这里传入的是User的id
+         * 将User的id赋值给self.user
+         */
+        setUser(userId) {
+            if (userId) {
+                self.user = userId;
+            }
+            else {
+                self.user = undefined;
+            }
+        },
     }));
+
+// 创建一个User模型
+const User = types.model({
+    id: types.identifier,// 定义User的标识符，也就是其它模型引用的值
+    name: types.optional(types.string, ''),
+});
 
 const RootStore = types
     .model({
         todos: types.map(Todo),
+        users: types.map(User),
     })
     /**
      * views 是用于定义计算属性和派生状态的方法
@@ -60,11 +89,20 @@ const RootStore = types
         addTodo(id, name) {
             self.todos.set(id, Todo.create({ name }));
         },
+        // 添加一个用户
+        addUser(id, name) {
+            self.users.set(id, User.create({ id, name }));// 必须传入id,否则会报错，且id不能修改
+        },
     }));
 
 // 创建并默认暴露一个RootStore对象
 const store = RootStore.create();
 export default store;
+
+// 手动添加三个用户
+store.addUser('1', '张三');
+store.addUser('2', '李四');
+store.addUser('3', '王五');
 
 // 创建一个数组，用于存储快照(历史记录)
 const states = [];

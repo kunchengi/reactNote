@@ -18,7 +18,7 @@ const Todo = observer((props) => (
         <button onClick={(e) => undo()}>撤销</button>
         <button onClick={(e) => redo()}>恢复</button>
         {values(props.store.todos).map((todo,id) => (
-            <TodoItem key={id} todo={todo} />
+            <TodoItem key={id} todo={todo} users={props.store.users} />
         ))}
         <TodoCounter store={props.store} />
     </div>
