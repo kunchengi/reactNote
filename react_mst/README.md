@@ -68,3 +68,17 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## mobx-state-tree
+
+### 文档
+
+* [mobx官方文档](https://cn.mobx.js.org/)
+* [mobx-state-tree官方文档](https://mobx-state-tree.js.org/)
+* [mobx-state-tree中文文档](https://juejin.cn/post/7097755866543161351)
+
+### 安装mobx、mobx-react-lite、mobx-state-tree
+
+```bash
+    npm i mobx mobx-react-lite mobx-state-tree
+```
