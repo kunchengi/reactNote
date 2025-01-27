@@ -13,8 +13,11 @@ const Todo = types
          * 引用user模型，存的是User的id，读的时候会自动解析为User模型
          * types.maybe: 表示该属性是可选的，可以为null或undefined
          * types.reference: 用来引用其他模型，这里引用的是User模型
-         * types.late: 表示该属性是一个延迟加载的模型，只有在需要时才会加载，这样能延迟User的解析，直到User被创建。
-         *             如果不使用late，User会立即被解析，如果User不存在，会报错
+         * types.late: 
+         *  表示该属性是一个延迟加载的模型，只有在需要时才会加载，这样能延迟User的解析，直到User被创建。
+         *  如果不使用late，可能会引发以下问题
+         *  1. 当前User未定义，报错：Cannot access 'User' before initialization
+         *  2. 模型之间可能存在循环依赖，MST在解析时会因为无法处理循环依赖而抛出错误
          * 使用引用还有一个好处，如果你不小心删除了 model，而这个 model 被某个计算属性所引用，MST 会直接抛出一个错误！
          * 如果你试图移除一个被引用的 user，你会得到这样的结果:Failed to resolve reference of type <late>: '1'
          */
