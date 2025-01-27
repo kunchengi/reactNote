@@ -3,7 +3,7 @@
  *  可以对model中的属性进行操作
  *  actions里的方法可以直接调用
  */
-import { types, getSnapshot } from 'mobx-state-tree';
+import { types, getSnapshot, onSnapshot, applySnapshot } from 'mobx-state-tree';
 
 // 创建一个Todo模型
 const Todo = types
@@ -55,3 +55,40 @@ store.todos.get('1').setName('吃饭');
 store.todos.get('1').toggle();
 
 console.log(getSnapshot(store));// {"users": {},"todos": {"1": {"name": "吃饭","done": true}}}
+
+/**
+ * 3. snapshot的使用
+ */
+
+/**
+ * onSnapshot可以监听store的变化
+ * 当store发生变化时，会触发onSnapshot的回调函数
+ * snapshot: 当前store的快照
+ */
+onSnapshot(store, (snapshot) => {
+    console.log(snapshot);
+});
+
+// 调用action添加一个todo
+store.addTodo('2');
+// 调用action设置name
+store.todos.get('2').setName('睡觉');
+// 调用action切换done状态
+store.todos.get('2').toggle();
+
+
+/**
+ * applySnapshot
+ * 可以恢复到某个快照
+ * 它只会更新部分属性,原来的引用会保持不变
+ * 会触发onSnapshot
+ */
+applySnapshot(store, {
+    todos: {
+        '1': { name: '做饭', done: false },
+        '2': { name: '睡觉', done: false },
+        '3': { name: '打游戏', done: false },
+    },
+});
+// 还是可以调用action修改属性
+store.todos.get('1').setName('吃饭');
