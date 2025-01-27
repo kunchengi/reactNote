@@ -4,6 +4,7 @@
  *  actions里的方法可以直接调用
  */
 import { types, getSnapshot, onSnapshot, applySnapshot } from 'mobx-state-tree';
+import { values } from 'mobx';
 
 // 创建一个Todo模型
 const Todo = types
@@ -92,3 +93,61 @@ applySnapshot(store, {
 });
 // 还是可以调用action修改属性
 store.todos.get('1').setName('吃饭');
+
+/**
+ * 4. mstMap的使用
+ */
+// 获取todos的值
+const todo = store.todos.get('1');
+console.log(todo.name);// 输出：吃饭
+
+// forEach遍历todos
+store.todos.forEach((todo, id) => {
+    console.log(id, todo.name);
+});
+/**
+ * 依次输出：
+ * 1 吃饭
+ * 2 睡觉
+ * 3 打游戏
+ */
+
+// for of 遍历todos
+for (const [id, todo] of store.todos) {
+    console.log(id, todo.name);
+}
+/**
+ * 依次输出：
+ * 1 吃饭
+ * 2 睡觉
+ * 3 打游戏
+ */
+
+// map遍历todos
+// store.todos没有map方法,需要借助mobx的values方法
+const todos = values(store.todos).map((todo, id) => {
+    return { id, name: todo.name };
+});
+console.log(todos);
+/**
+ * 输出：
+ * [
+ *   { id: '0', name: '吃饭' },
+ *   { id: '1', name: '睡觉' },
+ *   { id: '2', name: '打游戏' }
+ * ]
+ */
+
+// filter方法
+const pendingTodos = values(store.todos).filter((todo) => !todo.done);
+pendingTodos.forEach((todo) => {
+    console.log(getSnapshot(todo));
+});
+/**
+ * 输出：
+ * { name: '吃饭', done: false }
+ * { name: '睡觉', done: false }
+ * { name: '打游戏', done: false }
+ */
+
+// 其它数组相关方法也需要借助mobx的values方法
