@@ -74,7 +74,7 @@ console.log('任务:', getSnapshot(todo));// 输出：任务: { name: '张三', 
  * 3. types.number：设置属性的类型为数字
  * 4. types.boolean：设置属性的类型为布尔值
  * 5. types.array(type)：设置属性的类型为数组
- * 6. types.map(type)：设置属性的类型为map
+ * 6. types.map(type)：设置属性的类型为mstMap,他的快照实际上是Object
  * 7. types.model(model)：设置属性的类型为另一个types.model
  * 8. types.union(type1, type2)：设置属性的类型为联合类型
  * 
