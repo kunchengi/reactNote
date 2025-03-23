@@ -333,3 +333,37 @@
 * classnames: 用于动态控制css类名。
 * dayjs/moment: 时间处理库，常用于格式化、解析、操作日期和时间。
 * json-server: 快速创建一个mock服务器，用于开发阶段模拟数据请求。
+
+## 使用vite创建react-ts项目
+
+### 方式1
+* 安装vite
+  ```bash
+    npm i -g vite
+  ```
+* 创建react-ts-pro项目
+  ```bash
+    vite create react-ts-pro --template react-ts
+  ```
+* 安装依赖（有需要可以先更改对应依赖包的版本号）
+  ```bash
+    npm i
+  ```
+* 启动项目
+  ```bash
+    npm run dev
+  ```
+
+### 方式2
+* 直接创建react-ts-pro项目
+  ```bash
+    npm create vite@latest react-ts-pro -- --template react-ts
+  ```
+* 安装依赖（有需要可以先更改对应依赖包的版本号）
+  ```bash
+    npm i
+  ```
+* 启动项目
+  ```bash
+    npm run dev
+  ```
