@@ -10,17 +10,25 @@ const useStore = create((set) => ({
   inc: () => set((state) => ({ count: state.count + 1 })),
   dec: () => set((state) => ({ count: state.count - 1 })),
   reset: () => set({ count: 0 }),
+  // Zustand异步支持
+  // 直接在函数中编写异步逻辑，然后调用set方法修改状态即可
+  // 直接添加异步方法
+  asyncInc: async () => {
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+    set((state) => ({ count: state.count + 1 })); 
+  }
 }));
 
 function App() {
   // 4. 从store中获取数据和方法：
-  const { count, inc, dec, reset } = useStore();
+  const { count, inc, dec, reset, asyncInc } = useStore();
   return (
     <div className="App">
       <h1>{count}</h1>
       <button onClick={inc}>+1</button>
       <button onClick={dec}>-1</button>
       <button onClick={reset}>reset</button>
+      <button onClick={asyncInc}>异步+1</button>
     </div>
   );
 }
