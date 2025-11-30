@@ -334,14 +334,18 @@
 * dayjs/moment: 时间处理库，常用于格式化、解析、操作日期和时间。
 * json-server: 快速创建一个mock服务器，用于开发阶段模拟数据请求。
 
-## 使用vite创建react-ts项目
+## 使用vite创建react项目
 
 ### 方式1
 * 安装vite
   ```bash
     npm i -g vite
   ```
-* 创建react-ts-pro项目
+* 创建react+js项目
+  ```bash
+    vite create react-js-pro --template react
+  ```
+* 创建react+ts项目
   ```bash
     vite create react-ts-pro --template react-ts
   ```

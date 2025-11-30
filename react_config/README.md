@@ -70,33 +70,67 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
 ## 路径解析配置
-* 使用craco配置路径
-  * 安装依赖
-    ```bash
-      npm i -D @craco/craco
-    ```
-  * 根目录创建craco.config.js文件
-    ```javascript
-      const path = require('path');
-      module.exports = {
-        webpack: {
-            alias: {
-                '@': path.resolve(__dirname, 'src'),
-            },
+
+- 使用@符就可以导入src目录下的文件
+
+### craco配置
+
+* 安装依赖
+  ```bash
+    npm i -D @craco/craco
+  ```
+* 根目录创建craco.config.js文件
+  ```javascript
+    const path = require('path');
+    module.exports = {
+      webpack: {
+          alias: {
+              '@': path.resolve(__dirname, 'src'),
+          },
+      }
+    }
+  ```
+* package.json文件中配置启动和打包命令
+  ```json
+    "scripts": {
+      "start": "craco start",
+      "build": "craco build",
+    }
+  ```
+* 使用别名路径导入文件
+  ```jsx
+    import {Button} from '@/components/Button';
+  ```
+
+### vite配置
+
+* 在vite.config.js文件中配置别名路径
+  ```javascript
+    import { defineConfig } from 'vite'
+    import path from 'path'
+    export default defineConfig({
+      // ...其它配置
+      resolve: {
+        alias: {
+          '@': path.resolve(__dirname, 'src'),
+        },
+      }
+    })
+  ```
+* 在tsconfig.json文件中配置别名路径
+  ```json
+    {
+      "compilerOptions": {
+        "paths": {
+          "@/*": ["src/*"]
         }
       }
-    ```
-  * package.json文件中配置启动和打包命令
-    ```json
-      "scripts": {
-        "start": "craco start",
-        "build": "craco build",
-      }
-    ```
-  * 使用别名路径导入文件
-    ```jsx
-      import {Button} from '@/components/Button';
-    ```
+    }
+  ```
+* 使用别名路径导入文件
+  ```jsx
+    import {Button} from '@/components/Button';
+  ```
 
 ## 联想路径配置
   * 根目录新增jsconfig.json文件
